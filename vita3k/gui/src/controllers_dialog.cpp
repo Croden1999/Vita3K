@@ -358,15 +358,15 @@ void draw_controllers_dialog(GuiState &gui, EmuEnvState &emuenv) {
                             }
                         }
                     }
-                    ImGui::Spacing();
-                    ImGui::Separator();
-                    ImGui::Spacing();
-                    ImGui::SetCursorPosX((ImGui::GetWindowSize().x / 2.f) - (BUTTON_SIZE.x / 2.f));
-                    if (ImGui::Button(common["close"].c_str(), BUTTON_SIZE))
-                        rebinds_is_open = false;
-
-                    ImGui::End();
                 }
+                ImGui::Spacing();
+                ImGui::Separator();
+                ImGui::Spacing();
+                ImGui::SetCursorPosX((ImGui::GetWindowSize().x / 2.f) - (BUTTON_SIZE.x / 2.f));
+                if (ImGui::Button(common["close"].c_str(), BUTTON_SIZE))
+                    rebinds_is_open = false;
+
+                ImGui::End();
             }
             ImGui::EndTable();
         }

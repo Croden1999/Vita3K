@@ -198,9 +198,28 @@ void draw_initial_setup(GuiState &gui, EmuEnvState &emuenv) {
         ImGui::Checkbox(lang["show_info_bar"].c_str(), &emuenv.cfg.show_info_bar);
         SetTooltipEx(lang["info_bar_description"].c_str());
         ImGui::SameLine();
+        const std::string system_lang_name = fmt::format("{}: {}", lang.system["title"], get_sys_lang_name(emuenv.cfg.sys_lang));
+        std::vector<const char*> list_user_lang_str{ system_lang_name.c_str() };
+        static std::map<std::string, std::string> static_list_user_lang_names = {
+            { "id", "Indonesia" },
+            { "ms", "Malaysia" },
+            { "ua", reinterpret_cast<const char*>(u8"Українська") },
+        };
+        for (const auto& l : list_user_lang)
+            list_user_lang_str.push_back(static_list_user_lang_names.contains(l) ? static_list_user_lang_names[l].c_str() : l.c_str());
+        if (ImGui::Combo(lang.gui["user_lang"].c_str(), &current_user_lang, list_user_lang_str.data(), static_cast<int>(list_user_lang_str.size()), 4)) {
+            if (current_user_lang != 0)
+                emuenv.cfg.user_lang = list_user_lang[current_user_lang - 1];
+            else
+                emuenv.cfg.user_lang.clear();
+
+            lang::init_lang(gui.lang, emuenv);
+        }
+        SetTooltipEx(lang.gui["select_user_lang"].c_str());
+        ImGui::Spacing();
         ImGui::Checkbox(lang["show_live_area_screen"].c_str(), &emuenv.cfg.show_live_area_screen);
         SetTooltipEx(lang["live_area_screen_description"].c_str());
-        ImGui::Spacing();
+        ImGui::SameLine();
         ImGui::Checkbox(lang["apps_list_grid"].c_str(), &emuenv.cfg.apps_list_grid);
         SetTooltipEx(lang["apps_list_grid_description"].c_str());
         if (!emuenv.cfg.apps_list_grid) {

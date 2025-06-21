@@ -504,6 +504,21 @@ struct LangState {
             std::map<std::string, std::string> keyboards = { { "title", "Keyboards" } };
         };
         Language language;
+        struct System {
+            std::map<std::string, std::string> main = {
+                { "title", "System" }
+            };
+            std::map<std::string, std::string> system_information = {
+                { "title", "System Information" },
+                { "fw_version", "System Software" },
+                { "wlan_mac_address", "Mac Address" },
+                { "lan_mac_address", "Mac Address (LAN Cable)" },
+                { "memory_card", "Memory Card" },
+                { "manage_memory_card", "Manage Content on Memory Card" },
+                { "capacity", "Capacity" },
+            };
+        };
+        System system;
     };
     Settings settings;
     struct SettingsDialog {

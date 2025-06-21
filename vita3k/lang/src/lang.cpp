@@ -366,6 +366,16 @@ void init_lang(LangState &lang, EmuEnvState &emuenv) {
                             }
                         }
                     }
+
+                    // System
+                    const auto system = settings.child("system");
+                    if (!date_time.empty()) {
+                        // Main
+                        set_lang_string(lang.settings.system.main, system);
+
+                        // System Information
+                        set_lang_string(lang.settings.system.system_information, system.child("system_information"));
+                    }
                 }
 
                 // Settings Dialog

@@ -225,7 +225,8 @@ void draw_settings(GuiState &gui, EmuEnvState &emuenv) {
         BACKGROUND,
         DATE_FORMAT,
         TIME_FORMAT,
-        SELECT_INPUT_LANG
+        SELECT_INPUT_LANG,
+        SYSTEM_INFORMATION
     };
     static Menu menu = Menu::UNDEFINED;
 
@@ -233,7 +234,8 @@ void draw_settings(GuiState &gui, EmuEnvState &emuenv) {
         SELECT,
         THEME_BACKGROUND,
         DATE_TIME,
-        LANGUAGE
+        LANGUAGE,
+        SYSTEM
     };
 
     static SettingsMenu settings_menu = SettingsMenu::SELECT;
@@ -284,6 +286,7 @@ void draw_settings(GuiState &gui, EmuEnvState &emuenv) {
     auto &theme = theme_background.theme;
     auto &date_time = lang.date_time;
     auto &language = lang.language;
+    auto &system = lang.system;
 
     if (settings_menu == SettingsMenu::THEME_BACKGROUND) {
         // Search Bar
@@ -348,18 +351,38 @@ void draw_settings(GuiState &gui, EmuEnvState &emuenv) {
     switch (settings_menu) {
     case SettingsMenu::SELECT:
         title = lang.main["title"];
+        ImGui::Columns(2, nullptr, false);
         ImGui::SetWindowFontScale(1.2f);
         ImGui::PushStyleVar(ImGuiStyleVar_SelectableTextAlign, ImVec2(0.f, 0.5f));
         if (ImGui::Selectable(theme_background.main["title"].c_str(), false, ImGuiSelectableFlags_None, ImVec2(0.f, SIZE_SELECT))) {
             get_themes_list(gui, emuenv);
             settings_menu = SettingsMenu::THEME_BACKGROUND;
         }
+        ImGui::SetWindowFontScale(0.8f);
+        ImGui::PushStyleVar(ImGuiStyleVar_SelectableTextAlign, ImVec2(1.f, 0.5f));
+        ImGui::Selectable(">", false, ImGuiSelectableFlags_None, ImVec2(0.f, SIZE_SELECT));
+        ImGui::SetWindowFontScale(1.2f);
         ImGui::Separator();
         if (ImGui::Selectable(date_time.main["title"].c_str(), false, ImGuiSelectableFlags_None, ImVec2(0.f, SIZE_SELECT)))
             settings_menu = SettingsMenu::DATE_TIME;
+        ImGui::SetWindowFontScale(0.8f);
+        ImGui::PushStyleVar(ImGuiStyleVar_SelectableTextAlign, ImVec2(1.f, 0.5f));
+        ImGui::Selectable(">", false, ImGuiSelectableFlags_None, ImVec2(0.f, SIZE_SELECT));
+        ImGui::SetWindowFontScale(1.2f);
         ImGui::Separator();
         if (ImGui::Selectable(language.main["title"].c_str(), false, ImGuiSelectableFlags_None, ImVec2(0.f, SIZE_SELECT)))
             settings_menu = SettingsMenu::LANGUAGE;
+        ImGui::SetWindowFontScale(0.8f);
+        ImGui::PushStyleVar(ImGuiStyleVar_SelectableTextAlign, ImVec2(1.f, 0.5f));
+        ImGui::Selectable(">", false, ImGuiSelectableFlags_None, ImVec2(0.f, SIZE_SELECT));
+        ImGui::SetWindowFontScale(1.2f);
+        ImGui::Separator();
+        if (ImGui::Selectable(system.main["title"].c_str(), false, ImGuiSelectableFlags_None, ImVec2(0.f, SIZE_SELECT)))
+            settings_menu = SettingsMenu::SYSTEM;
+        ImGui::SetWindowFontScale(0.8f);
+        ImGui::PushStyleVar(ImGuiStyleVar_SelectableTextAlign, ImVec2(1.f, 0.5f));
+        ImGui::Selectable(">", false, ImGuiSelectableFlags_None, ImVec2(0.f, SIZE_SELECT));
+        ImGui::SetWindowFontScale(1.2f);
         ImGui::PopStyleVar();
         ImGui::Separator();
         break;
@@ -1010,6 +1033,81 @@ void draw_settings(GuiState &gui, EmuEnvState &emuenv) {
                     ImGui::NextColumn();
                     ImGui::Columns(1);
                 }
+            }
+        }
+        break;
+    case SettingsMenu::SYSTEM:
+        // System
+        if (menu == Menu::UNDEFINED) {
+            title = system.main["title"];
+            ImGui::Columns(2, nullptr, false);
+            ImGui::SetWindowFontScale(1.2f);
+            ImGui::PopStyleVar();
+            ImGui::Separator();
+            ImGui::NextColumn();
+            ImGui::PushStyleVar(ImGuiStyleVar_SelectableTextAlign, ImVec2(0.f, 0.5f));
+            if (ImGui::Selectable(system.system_information["title"].c_str(), false, ImGuiSelectableFlags_SpanAllColumns, ImVec2(0.f, SIZE_SELECT)))
+                menu = Menu::SYSTEM_INFORMATION;
+            ImGui::PopStyleVar();
+            ImGui::NextColumn();
+            ImGui::SetWindowFontScale(0.8f);
+            ImGui::PushStyleVar(ImGuiStyleVar_SelectableTextAlign, ImVec2(1.f, 0.5f));
+            ImGui::Selectable(">", false, ImGuiSelectableFlags_None, ImVec2(0.f, SIZE_SELECT));
+            ImGui::SetWindowFontScale(1.2f);
+            ImGui::Separator();
+            ImGui::NextColumn();
+            ImGui::Columns(1);
+            ImGui::PopStyleVar();
+            case Menu::SYSTEM_INFORMATION: {
+                // System Information
+                title = system.system_information["title"];
+                ImGui::SetWindowFontScale(1.2f);
+                ImGui::PushStyleVar(ImGuiStyleVar_SelectableTextAlign, ImVec2(0.f, 0.5f));
+
+                const auto INFO_POS = ImVec2(390.f * SCALE.x, 30.f * SCALE.y);
+                const auto SIZE_POS = ImVec2(530.f * SCALE.x, 30.f * SCALE.y);
+                auto& info = system.system_information;
+                ImGui::SetWindowFontScale(0.94f);
+                ImGui::SetCursorPosY(ImGui::GetCursorPosY() + INFO_POS.y);
+                ImGui::TextColored(GUI_COLOR_TEXT, "%s", info["fw_version"].c_str());
+                ImGui::SameLine();
+                ImGui::SetCursorPosX(INFO_POS.x);
+                ImGui::TextColored(GUI_COLOR_TEXT, "%s", "-");
+                ImGui::SetCursorPosY(ImGui::GetCursorPosY() + INFO_POS.y);
+                ImGui::TextColored(GUI_COLOR_TEXT, "%s", info["wlan_mac_address"].c_str());
+                ImGui::SameLine();
+                ImGui::SetCursorPosX(INFO_POS.x);
+                ImGui::TextColored(GUI_COLOR_TEXT, "%s", "-");
+                ImGui::PopTextWrapPos();
+                ImGui::SetCursorPosY(ImGui::GetCursorPosY() + INFO_POS.y);
+                ImGui::TextColored(GUI_COLOR_TEXT, "%s", info["lan_mac_address"].c_str());
+                ImGui::SameLine();
+                ImGui::SetCursorPosX(INFO_POS.x);
+                ImGui::TextColored(GUI_COLOR_TEXT, "%s", "-");
+                ImGui::SetCursorPosY(ImGui::GetCursorPosY() + INFO_POS.y);
+                ImGui::TextColored(GUI_COLOR_TEXT, "%s", info["memory_card"].c_str());
+                ImGui::SameLine();
+                ImGui::SetWindowFontScale(0.6f);
+                ImGui::SetCursorPosY(INFO_POS.y);
+                ImGui::TextColored(GUI_COLOR_TEXT, "%s", info["manage_memory_card"].c_str());
+                ImGui::PopTextWrapPos();
+                ImGui::SetCursorPosY(INFO_POS.y);
+                ImGui::TextColored(GUI_COLOR_TEXT, "%s", info["capacity"].c_str());
+                ImGui::SameLine();;
+                ImGui::SetCursorPosX(SIZE_POS.x);
+                ImGui::TextColored(GUI_COLOR_TEXT, "%s", "-");
+                ImGui::Spacing();
+                ImGui::SetCursorPosY(INFO_POS.y);
+                ImGui::TextColored(GUI_COLOR_TEXT, "%s", gui.lang.content_manager.main["free_space"].c_str());
+                ImGui::SameLine();;
+                ImGui::SetCursorPosX(SIZE_POS.x);
+                ImGui::TextColored(GUI_COLOR_TEXT, "%s", "-");
+                ImGui::SameLine();
+                ImGui::Columns(1);
+                ImGui::PopStyleVar();
+                ImGui::End();
+                ImGui::PopStyleColor();
+                break;
             }
         }
         break;

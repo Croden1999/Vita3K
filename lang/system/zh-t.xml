@@ -586,6 +586,16 @@
 				</keyboards>
 			</input_language>
 		</language>
+		<system name="系統">
+			<system_information name ="系統資訊">
+				<fw_version>系統軟件</fw_version>
+				<wlan_mac_address>MAC位址</wlan_mac_address>
+				<lan_mac_address>MAC位址（LAN連接缐）</lan_mac_address>
+				<memory_card>記憶卡</memory_card>
+				<manage_memory_card>管理記憶卡的內容</manage_memory_card>
+				<capacity>容量</capacity>
+			</system_information>
+		</system>
 	</settings>
 
 	<settings_dialog name="設定">

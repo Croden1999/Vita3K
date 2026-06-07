@@ -91,7 +91,7 @@ void draw_online_storage(GuiState &gui, EmuEnvState &emuenv) {
     ImGui::Separator();
     ImGui::SetCursorPos(ImVec2(54.f * SCALE.x, SEPARATOR_CLOUD_POS_Y + ((LOCATION_SECTION_SIZE_Y - ImGui::GetFontSize()) / 2.f)));
 
-    ImGui::Text("Cloud");
+    ImGui::Text("%s", lang["cloud"].c_str());
 
     const auto has_cloud_save = storage_state.savedata_info.contains(SAVE_DATA_TYPE_CLOUD);
     const auto has_local_save = storage_state.savedata_info.contains(SAVE_DATA_TYPE_LOCAL);
@@ -194,9 +194,8 @@ void draw_online_storage(GuiState &gui, EmuEnvState &emuenv) {
             const auto &src_save = is_upload ? storage_state.savedata_info[SAVE_DATA_TYPE_LOCAL] : storage_state.savedata_info[SAVE_DATA_TYPE_CLOUD];
             const auto &dst_save = is_upload ? storage_state.savedata_info[SAVE_DATA_TYPE_CLOUD] : storage_state.savedata_info[SAVE_DATA_TYPE_LOCAL];
 
-            const auto &current_ps_system = emuenv.cfg.pstv_mode ? lang["ps_tv_system"] : lang["ps_vita_system"];
-            const auto &src_title = is_upload ? current_ps_system : lang["online_storage"];
-            const auto &dst_title = is_upload ? lang["online_storage"] : current_ps_system;
+            const auto &src_title = is_upload ? "Vita3K" : lang["online_storage"];
+            const auto &dst_title = is_upload ? lang["online_storage"] : "Vita3K";
 
             const auto draw_save_info = [&](const ImVec2 &begin_pos, const std::string &title, const SaveDataInfo &save_info) {
                 ImGui::SetCursorPos(begin_pos);
@@ -341,7 +340,7 @@ void draw_online_storage(GuiState &gui, EmuEnvState &emuenv) {
 
     ImGui::SetWindowFontScale(1.85f * RES_SCALE.y);
     ImGui::SetCursorPos(ImVec2(54.f * SCALE.x, END_SEPARATOR_POS_Y + ((LOCATION_SECTION_SIZE_Y - ImGui::GetFontSize()) / 2.f)));
-    ImGui::Text("Local");
+    ImGui::Text("%s", lang["local"].c_str());
 
     ImGui::SetWindowFontScale(1.68f * RES_SCALE.y);
     if (has_local_save) {

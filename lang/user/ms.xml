@@ -72,9 +72,6 @@
 			<shaders_cache>Cache Shaders</shaders_cache>
 			<shaders_log>Log Shaders</shaders_log>
 		</path>
-		<live_area>
-			<update>Kemas kini</update>
-		</live_area>
 		<delete>
 			<delete_app>Apl ini dan semua data berkaitan, termasuk data yang disimpan, akan dipadamkan.</delete_app>
 			<delete_app_description>Memadamkan Apl mungkin mengambil sedikit masa,
@@ -486,7 +483,7 @@ Sila semak fail work.bin/rif atau zRIF key.</failed_install_license>
 	</live_area>
 
 	<message>
-		<load_app_failed>Gagal memuatkan "{}".
+		<load_app_failed>Gagal memuatkan {}.
 Semak vita3k.log untuk melihat output konsol untuk mendapatkan butiran.
 1. Adakah awak telah memasang perisian tegar?
 2. Buat PS Vita apl/gim awak sendiri dan pasang pada Vita3K.

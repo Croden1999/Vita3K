@@ -54,7 +54,7 @@ struct DialogLangState {
         { "could_not_connect_internet", "Could not connect to the Internet." },
         { "vita3k_network_connection_lost", "The connection to Vita3K Network has been lost." }
     };
-    std::map<std::string, std::string> message = { { "load_app_failed", "Failed to load \"{}\".\nCheck vita3k.log to see console output for details.\n1. Have you installed the firmware?\n2. Re-dump your own PS Vita app/game and install it on Vita3K.\n3. If you want to install or boot Vitamin, it is not supported." } };
+    std::map<std::string, std::string> message = { { "load_app_failed", "Failed to load {}.\nCheck vita3k.log to see console output for details.\n1. Have you installed the firmware?\n2. Re-dump your own PS Vita app/game and install it on Vita3K.\n3. If you want to install or boot Vitamin, it is not supported." } };
     std::map<std::string, std::string> trophy = { { "preparing_start_app", "Preparing to start the application..." } };
     struct SaveData {
         std::map<std::string, std::string> deleting = {
@@ -108,7 +108,7 @@ struct LangState {
         std::map<std::string, std::string> file = {
             { "title", "File" },
             { "open_pref_path", "Open Pref Path" },
-            { "open_patch_path", "Open Patch Path" },
+            { "open_patches_path", "Open Patch Path" },
             { "open_textures_path", "Open Textures Path" },
             { "install_firmware", "Install Firmware" },
             { "install_pkg", "Install .pkg" },
@@ -193,8 +193,7 @@ struct LangState {
             { "shaders_log", "Shaders Log" }
         };
         std::map<std::string, std::string> live_area = {
-            { "manual", "Manual" },
-            { "update", "Update" }
+            { "manual", "Manual" }
         };
         std::map<std::string, std::string> deleting = {
             { "delete_app", "This application and all related data, including saved data, will be deleted." },
@@ -205,6 +204,7 @@ struct LangState {
         };
         std::map<std::string, std::string> other = {
             { "title", "Other" },
+            { "decrypt_all_self", "Decrypt all SELF" },
             { "reset_last_time_played", "Reset Last Time Played" }
         };
         std::map<std::string, std::string> info = {
@@ -400,6 +400,7 @@ struct LangState {
         { "apps_list_grid_description", "Check the box to set the app list to grid mode like of PS Vita." },
         { "icon_size", "App Icon Size" },
         { "select_icon_size", "Select your preferred icon size." },
+        { "system_music_description", "This option can be changed later in the system Settings app." },
         { "completed", "Completed." },
         { "next", "Next" }
     };
@@ -419,6 +420,7 @@ struct LangState {
             { "enter_zrif", "Enter zRIF" },
             { "enter_zrif_key", "Enter zRIF key" },
             { "input_zrif", "Please input your zRIF here" },
+            { "inputmethod_paste_zrif", "Use the input method clipboard to copy and paste.\nKeyboard: Ctrl + C to copy, Ctrl + V to paste." },
             { "copy_paste_zrif", "Ctrl + C to copy, Ctrl + V to paste." },
             { "delete_pkg", "Delete the pkg file?" },
             { "delete_bin_rif", "Delete the work.bin/rif file?" },
@@ -463,14 +465,14 @@ struct LangState {
             { "show_hide", "Show/Hide Live Area during app run" },
             { "show_hide_control", "Press on PS" },
             { "exit_livearea", "Exit Live Area" },
-            { "exit_livearea_control", "Click on Esc or Press on Circle" },
+            { "exit_livearea_control", "Click on X or Press on Circle" },
             { "manual_help", "Manual Help" },
             { "browse_page", "Browse page" },
             { "browse_page_control", "D-pad, Left Stick, Wheel in Up/Down or using Slider, Click on </>" },
             { "hide_show", "Hide/Show button" },
             { "hide_show_control", "Left Click or Press on Triangle" },
             { "exit_manual", "Exit Manual" },
-            { "exit_manual_control", "Click on Esc or Press on PS" }
+            { "exit_manual_control", "Click on X or Press on PS" }
         };
     };
     LiveArea live_area;
@@ -484,15 +486,15 @@ struct LangState {
         { "memory_card", "Memory Card" },
         { "minutes_left", "{} Minutes Left" },
         { "online_storage", "Online Storage" },
+        { "cloud", "Cloud" },
         { "overwrite_saved_data", "Do you want to overwrite the saved data ?" },
-        { "ps_vita_system", "PS Vita System" },
-        { "ps_tv_system", "PS TV System" },
         { "seconds_left", "{} Seconds Left" },
         { "size", "Size" },
         { "trophy_earning", "Trophy Earning" },
         { "updated", "Updated" },
         { "upload", "Upload" },
-        { "uploaded", "Uploaded" }
+        { "uploaded", "Uploaded" },
+        { "local", "Local" }
     };
     std::map<std::string, std::string> overlay = {
         { "title", "Overlay" },
@@ -588,18 +590,22 @@ struct LangState {
         std::map<std::string, std::string> core = {
             { "title", "Core" },
             { "modules_mode", "Modules Mode" },
+            { "automatic", "Automatic" },
+            { "automatic_description", "Select Automatic mode to use a preset list of modules." },
+            { "auto_manual", "Auto & Manual" },
+            { "auto_manual_description", "Select this mode to load Automatic module and selected modules from the list below." },
+            { "manual", "Manual" },
+            { "manual_description", "Select Manual mode to load selected modules from the list below." },
             { "modules_list", "Modules List" },
             { "select_modules", "Select your desired modules." },
             { "search_modules", "Search Modules" },
             { "clear_list", "Clear List" },
             { "no_modules", "No modules present.\nPlease download and install the last PS Vita firmware." },
             { "refresh_list", "Refresh List" },
-            { "automatic", "Automatic" },
-            { "automatic_description", "Select Automatic mode to use a preset list of modules." },
-            { "auto_manual", "Auto & Manual" },
-            { "auto_manual_description", "Select this mode to load Automatic module and selected modules from the list below." },
-            { "manual", "Manual" },
-            { "manual_description", "Select Manual mode to load selected modules from the list below." }
+            { "rename_libpaf", "Rename libpaf" },
+            { "libpaf_rename", "Rename libpaf module can boot VitaShell and other homebrew apps." },
+            { "restore_libpaf", "Restore libpaf" },
+            { "libpaf_restore", "Restore libpaf module can boot PSVita OS." }
         };
         std::map<std::string, std::string> cpu = {
             { "cpu_opt", "Enable optimizations" },
@@ -872,6 +878,68 @@ struct LangState {
         { "user", "User" },
         { "confirm", "Confirm" },
         { "automatic_user_login", "Automatic User Login" }
+    };
+    std::map<std::string, std::string> vita3k_network = {
+        { "title", "V3KN Account Management" },
+        { "server_name", "Server: " },
+        { "signed_in_id", "Signed In - ID: " },
+        { "offline_id", "Offline - ID: " },
+        { "not_signed_in_id", "Not Signed In - ID: " },
+        { "created_at", "Created At: " },
+        { "quota_used", "Quota Used: " },
+        { "create_account", "Create Account" },
+        { "create_v3kn_account", "Create V3KN Account" },
+        { "account_username_password", "Please enter a username and password to create your V3KN account." },
+        { "account_username", "Username must start with a letter and contain 3-16 characters (letters, numbers, _ or -)." },
+        { "account_password", "Password must be at least 8 characters long." },
+        { "username", "Username" },
+        { "password", "Password" },
+        { "confirm_password", "Confirm Password" },
+        { "password_not_match", "Password and confirmation do not match." },
+        { "account_success_created", "Account created successfully for user {}." },
+        { "unexpected_response_format", "Unexpected response format from server: {}." },
+        { "login", "Login" },
+        { "v3kn_login", "V3KN Login" },
+        { "account_success_login", "Login on V3KN successfully for user {}." },
+        { "testing", "Testing..." },
+        { "test_connection", "Test Connection" },
+        { "test_saved_credentials", "Test connection to V3KN server with saved credentials." },
+        { "refresh_quota", "Refresh Quota" },
+        { "quota_refreshed", "Quota refreshed: " },
+        { "delete_account", "Delete Account" },
+        { "delete_v3kn_account", "Delete V3KN Account" },
+        { "account_success_deleted", "Account V3KN deleted successfully for user {}." },
+        { "logout", "Logout" },
+        { "v3kn_logout", "Are you sure you want to logout from V3KN?" },
+        { "account_success_logout", "Logged out successfully." },
+        { "change_online_id", "Change Online ID" },
+        { "change_v3kn_online_id", "Change V3KN Online ID" },
+        { "new_username", "New Username" },
+        { "online_id_success_changed", "Online ID successfully changed to {}." },
+        { "change_password", "Change Password" },
+        { "change_v3kn_password", "Change V3KN Password" },
+        { "current_password", "Current Password" },
+        { "new_password", "New Password" },
+        { "current_password_incorrect", "Current password is incorrect." },
+        { "password_success_changed", "Password changed successfully for user {}." },
+        { "change_about_me", "Change About Me" },
+        { "change_v3kn_about_me", "Change V3KN About Me" },
+        { "about_me", "About Me" },
+        { "about_me_success_changed", "About Me changed successfully for user {}." },
+        { "change_avatar", "Change Avatar" },
+        { "change_v3kn_avatar", "Change V3KN Avatar" },
+        { "browse", "Browse..." },
+        { "load_image_failed", "Failed to load image." },
+        { "file_dialog_error", "File dialog error: {}." },
+        { "uploading", "Uploading..." },
+        { "processing_image_failed", "Failed to load image for processing." },
+        { "change_panel", "Change Panel" },
+        { "change_v3kn_panel", "Change V3KN Panel" },
+        { "crop_v3kn_panel", "Crop V3KN Panel" },
+        { "selected", "Selected: " },
+        { "change_server", "Change Server" },
+        { "change_v3kn_server", "Change V3KN Server" },
+        { "server", "Server" }
     };
     std::map<std::string, std::string> vita3k_update = {
         { "title", "Vita3K Update" },

@@ -1058,15 +1058,6 @@ void draw_ui(GuiState &gui, EmuEnvState &emuenv) {
     if (gui.controls_menu.controllers_dialog)
         draw_controllers_dialog(gui, emuenv);
 
-    if (gui.help_menu.about_dialog)
-        draw_about_dialog(gui, emuenv);
-    if (gui.help_menu.welcome_dialog)
-        draw_welcome_dialog(gui, emuenv);
-
-    ImGui::PopFont();
-
-    ImGui::PushFont(gui.monospaced_font[emuenv.current_font_level]);
-
     if (gui.debug_menu.threads_dialog)
         draw_threads_dialog(gui, emuenv);
     if (gui.debug_menu.thread_details_dialog)
@@ -1087,6 +1078,15 @@ void draw_ui(GuiState &gui, EmuEnvState &emuenv) {
         draw_allocations_dialog(gui, emuenv);
     if (gui.debug_menu.disassembly_dialog)
         draw_disassembly_dialog(gui, emuenv);
+
+    if (gui.help_menu.about_dialog)
+        draw_about_dialog(gui, emuenv);
+    if (gui.help_menu.welcome_dialog)
+        draw_welcome_dialog(gui, emuenv);
+
+    ImGui::PopFont();
+
+    ImGui::PushFont(gui.monospaced_font[emuenv.current_font_level]);
 
     ImGui::PopFont();
 }

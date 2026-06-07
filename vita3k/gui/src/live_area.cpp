@@ -1401,10 +1401,10 @@ void draw_live_area_screen(GuiState &gui, EmuEnvState &emuenv) {
         const auto manual_exist = fs::exists(manual_path) && !fs::is_empty(manual_path);
 
         std::vector<ButtonEntry> buttons;
-        buttons.emplace_back("Search", SEARCH, [&]() { open_search(APP_INDEX->title); });
+        buttons.emplace_back(emuenv.common_dialog.lang.common["search"].c_str(), SEARCH, [&]() { open_search(APP_INDEX->title); });
         if (manual_exist)
-            buttons.emplace_back("Manual", MANUAL, [&]() { open_manual(gui, emuenv, app_path); });
-        buttons.emplace_back("Refresh", REFRESH, [&]() { refresh_app(gui, emuenv, app_path); });
+            buttons.emplace_back(gui.lang.app_context.live_area["manual"].c_str(), MANUAL, [&]() { open_manual(gui, emuenv, app_path); });
+        buttons.emplace_back(gui.lang.home_screen["refresh"].c_str(), REFRESH, [&]() { refresh_app(gui, emuenv, app_path); });
         if (app_path.find("PCS") != std::string::npos) {
             buttons.emplace_back("Cloud", CLOUD, [&]() { v3kn::open_online_storage(gui, emuenv, APP_INDEX->title_id); });
         }
@@ -1457,10 +1457,10 @@ void draw_live_area_screen(GuiState &gui, EmuEnvState &emuenv) {
     if (!gui.vita_area.content_manager && !gui.vita_area.manual) {
         ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 6.f * SCALE.x);
         ImGui::SetCursorPos(ImVec2(WINDOW_SIZE.x - (60.0f * SCALE.x) - BUTTON_SIZE.x, 12.0f * SCALE.y));
-        if (ImGui::Button("Esc", BUTTON_SIZE))
+        if (ImGui::Button("X", BUTTON_SIZE))
             close_live_area_app(gui, emuenv, app_path);
         ImGui::SetCursorPos(ImVec2(60.f * SCALE.x, 12.0f * SCALE.y));
-        if (ImGui::Button("Help", BUTTON_SIZE))
+        if (ImGui::Button("?", BUTTON_SIZE))
             ImGui::OpenPopup("Live Area Help");
         ImGui::SetNextWindowPos(ImVec2(WINDOW_SIZE.x / 2.f, WINDOW_SIZE.y / 2.f), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
         if (ImGui::BeginPopupModal("Live Area Help", nullptr, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoSavedSettings)) {

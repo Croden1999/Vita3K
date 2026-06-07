@@ -4,7 +4,7 @@
 	<main_menubar>
 		<file name="文件">
 			<open_pref_path>打开存放路径</open_pref_path>
-			<open_patch_path>打开补丁路径</open_patch_path>
+			<open_patches_path>打开补丁路径</open_patches_path>
 			<open_textures_path>打开纹理路径</open_textures_path>
 			<install_firmware>安装固件</install_firmware>
 			<install_pkg>安装pkg</install_pkg>
@@ -79,7 +79,6 @@
 		</path>
 		<live_area>
 			<manual>说明书</manual>
-			<update>升级</update>
 		</live_area>
 		<delete>
 			<delete_app>删除此应用程序及所有相关数据，包括保存数据。</delete_app>
@@ -89,7 +88,8 @@
 			<delete_addcont>要删除此追加内容吗？</delete_addcont>
 			<delete_license>要删除此授权吗？</delete_license>
 		</delete>
-		<other name="其他">
+		<other name="其它">
+			<decrypt_all_self>解密全部SELF</decrypt_all_self>
 			<reset_last_time_played>重置最近游玩时间</reset_last_time_played>
 		</other>
 		<update_history>更新历史记录</update_history>
@@ -125,6 +125,8 @@
 		<an_error_occurred>发生了错误。
 错误代码：{}</an_error_occurred>
 		<cancel>取消</cancel>
+		<connecting_please_wait>正在连接…
+请稍等。</connecting_please_wait>
 		<close>关闭</close>
 		<could_not_load>无法读取文件。</could_not_load>
 		<could_not_save>无法保存文件。</could_not_save>
@@ -133,12 +135,17 @@
 		<file_corrupted>文件已损坏。</file_corrupted>
 		<microphone_disabled>请启用麦克风。</microphone_disabled>
 		<no>否</no>
+		<ok>OK</ok>
 		<please_wait>请稍等…</please_wait>
 		<search>搜索</search>
 		<select_all>全部选择</select_all>
 		<select>选择</select>
 		<submit>提交</submit>
 		<yes>是</yes>
+		<could_not_connect_server>无法连接服务器。</could_not_connect_server>
+		<must_sign_in_vita3k_network>若要使用此功能，需登陆 Vita3K Network。</must_sign_in_vita3k_network>
+		<could_not_connect_internet>无法连接互联网。</could_not_connect_internet>
+		<vita3k_network_connection_lost>与Vita3K Network的连接已被切断。</vita3k_network_connection_lost>
 		<wday>
 			<day>星期日</day>
 			<day>星期一</day>
@@ -324,6 +331,7 @@
 	<controls>
 		<button>按键</button>
 		<mapped_button>映射按键</mapped_button>
+		<mapped_button_alt>备用映射按键</mapped_button_alt>
 		<left_stick_up>左摇杆上</left_stick_up>
 		<left_stick_down>左摇杆下</left_stick_down>
 		<left_stick_right>左摇杆右</left_stick_right>
@@ -362,7 +370,7 @@
 		<pinch_modifier>捏合变更键</pinch_modifier>
 		<alternate_pinch_in>交替捏合向内键</alternate_pinch_in>
 		<alternate_pinch_out>交替捏合向外/伸缩键</alternate_pinch_out>
-		<error_duplicate_key>该按键已被使用并绑定其他键或被预留。</error_duplicate_key>
+		<error_duplicate_key>该按键已被使用并绑定其它键或被预留。</error_duplicate_key>
 		<reset_controls_binding>重置控制绑定</reset_controls_binding>
 	</controls>
 
@@ -472,6 +480,7 @@
 		<apps_list_grid_description>勾选此项将应用程序列表设置为像PS Vita一样的网格模式。</apps_list_grid_description>
 		<icon_size>应用程序图标大小</icon_size>
 		<select_icon_size>选择您喜欢的图标大小。</select_icon_size>
+		<system_music_description>此项可以稍后在系统设定应用程序中更改。</system_music_description>
 		<completed>已完成。</completed>
 		<next>继续</next>
 	</initial_setup>
@@ -492,6 +501,8 @@
 			<enter_zrif>输入zRIF</enter_zrif>
 			<enter_zrif_key>输入zRIF密钥</enter_zrif_key>
 			<input_zrif>请在此处输入您的zRIF</input_zrif>
+			<inputmethod_paste_zrif>使用输入法剪贴板复制粘贴。
+键盘：Ctrl+C复制，Ctrl+V粘贴。</inputmethod_paste_zrif>
 			<copy_paste_zrif>Ctrl+C复制，Ctrl+V粘贴。</copy_paste_zrif>
 			<delete_pkg>删除pkg文件？</delete_pkg>
 			<delete_bin_rif>删除work.bin/rif文件？</delete_bin_rif>
@@ -536,24 +547,45 @@
 			<show_hide>应用程序运行时显示/隐藏</show_hide>
 			<show_hide_control>按PS键</show_hide_control>
 			<exit_livearea>退出Live Area</exit_livearea>
-			<exit_livearea_control>点击Esc或按圆形键</exit_livearea_control>
+			<exit_livearea_control>点击X或按圆形键</exit_livearea_control>
 			<manual_help>说明书帮助</manual_help>
 			<browse_page>浏览页面</browse_page>
 			<browse_page_control>方向键、左摇杆、滚轮上/下或使用滚动条、点击&lt;/&gt;</browse_page_control>
 			<hide_show>隐藏/显示按钮</hide_show>
 			<hide_show_control>点击左键或按三角键</hide_show_control>
 			<exit_manual>退出说明书</exit_manual>
-			<exit_manual_control>点击Esc或按PS键</exit_manual_control>
+			<exit_manual_control>点击X或按PS键</exit_manual_control>
 		</help>
 	</live_area>
 
 	<message>
-		<load_app_failed>无法读取“{}”，
+		<load_app_failed>无法读取 {} ，
 请检查vita3k.log查看控制台输出的详细信息。
 1、您是否安装了固件？
 2、重新提取您已拥有的PS Vita应用程序/游戏，并在Vita3K中安装。
 3、如果您想要安装/运行Vitamin是不支持的。</load_app_failed>
 	</message>
+
+	<online_storage>
+		<save_data_auto_upload>自动上传保存数据</save_data_auto_upload>
+		<copying>正在复制…</copying>
+		<download>下载</download>
+		<eligible>有权</eligible>
+		<ineligible>无权</ineligible>
+		<location>位置</location>
+		<memory_card>存储卡</memory_card>
+		<minutes_left>剩余 {}分钟</minutes_left>
+		<online_storage>在线存储</online_storage>
+		<cloud>云端</cloud>
+		<overwrite_saved_data>要覆盖保存数据吗？</overwrite_saved_data>
+		<seconds_left>剩余 {}秒</seconds_left>
+		<size>大小</size>
+		<trophy_earning>获得奖杯</trophy_earning>
+		<updated>升级日期</updated>
+		<upload>上传</upload>
+		<uploaded>上传日</uploaded>
+		<local>本地</local>
+	</online_storage>
 
 	<overlay name="虚拟按键">
 		<gamepad_overlay>手柄虚拟按键</gamepad_overlay>
@@ -574,6 +606,9 @@
 	</performance_overlay>
 
 	<settings name="设定">
+		<sound_display name="声音& 显示器">
+			<system_music>系统音乐</system_music>
+		</sound_display>
 		<theme_background name="主题&背景">
 			<default>原始</default>
 			<theme name="主题">
@@ -651,6 +686,10 @@
 			<no_modules>没有模块存在。
 请下载并安装最新的PS Vita固件。</no_modules>
 			<refresh_list>刷新列表</refresh_list>
+			<rename_libpaf>重命名libpaf</rename_libpaf>
+			<libpaf_rename>重命名libpaf模块可以启动VitaShell以及其它自制程序。</libpaf_rename>
+			<restore_libpaf>恢复libpaf</restore_libpaf>
+			<libpaf_restore>恢复libpaf模块可以启动PSVita OS.</libpaf_restore>
 		</core>
 		<cpu>
 			<cpu_opt>启用优化</cpu_opt>
@@ -697,7 +736,7 @@
 			<fps_hack>FPS修改</fps_hack>
 			<fps_hack_description>游戏修改允许一些以30FPS运行的游戏在模拟器上以60FPS的速度运行。
 请注意这只是一个修改，仅适用于某些游戏。
-在其他游戏中，它可能没有效果或使其出现两倍速。</fps_hack_description>
+在其它游戏中，它可能没有效果或使其出现两倍速。</fps_hack_description>
 			<disabled>禁用</disabled>
 			<double_buffer>双重缓冲</double_buffer>
 			<external_host>外部主机</external_host>
@@ -728,6 +767,14 @@
 			<bgm_volume>背景音乐音量</bgm_volume>
 			<bgm_volume_description>调整主题背景音乐的音量百分比。</bgm_volume_description>
 		</audio>
+		<camera name="相机">
+			<front_camera>前置摄像头</front_camera>
+			<back_camera>后置摄像头</back_camera>
+			<image_not_set>图像未设置</image_not_set>
+			<set_image>设置图像</set_image>
+			<solid_color>纯色</solid_color>
+			<static_image>静态图像</static_image>
+		</camera>
 		<system name="系统">
 			<select_enter_button>确认按键分配
 请选择您的“确认”按键。</select_enter_button>
@@ -943,9 +990,72 @@
 		<user_deleted>用户已删除。</user_deleted>
 		<choose_avatar>选择虚拟形象</choose_avatar>
 		<reset_avatar>重置虚拟形象</reset_avatar>
+		<user>User</user>
 		<confirm>确定</confirm>
 		<automatic_user_login>自动登录用户</automatic_user_login>
 	</user_management>
+
+	<vita3k_network name="V3KN账号管理">
+		<server_name>服务器：</server_name>
+		<signed_in_id>已登陆 - ID：</signed_in_id>
+		<offline_id>离线 - ID：</offline_id>
+		<not_signed_in_id>未登陆 - ID：</not_signed_in_id>
+		<created_at>创建于：</created_at>
+		<quota_used>已使用配额：</quota_used>
+		<create_account>创建账号</create_account>
+		<create_v3kn_account>创建V3KN账号</create_v3kn_account>
+		<account_username_password>请输入用户名和密码以创建您的V3KN账号。</account_username_password>
+		<account_username>用户名必须以字母开头，并且包含3到16位字符（字母、数字、_或-）。</account_username>
+		<account_password>密码长度必须至少为8位字符。</account_password>
+		<username>用户名</username>
+		<password>密码</password>
+		<confirm_password>确认密码</confirm_password>
+		<password_not_match>密码和确认密码不匹配。</password_not_match>
+		<account_success_created>用户{}的账号已成功创建。</account_success_created>
+		<unexpected_response_format>来自服务器的意外响应格式：{}。</unexpected_response_format>
+		<login>登陆</login>
+		<v3kn_login>登陆V3KN</v3kn_login>
+		<account_success_login>用户{}成功登录V3KN。</account_success_login>
+		<testing>正在测试…</testing>
+		<test_connection>测试连接</test_connection>
+		<test_saved_credentials>使用已保存的凭据测试与V3KN服务器的连接。</test_saved_credentials>
+		<refresh_quota>刷新配额</refresh_quota>
+		<quota_refreshed>配额已刷新：</quota_refreshed>
+		<delete_account>删除账号</delete_account>
+		<delete_v3kn_account>删除V3KN账号</delete_v3kn_account>
+		<account_success_deleted>已成功为用户{}删除V3KN账号。</account_success_deleted>
+		<logout>登出</logout>
+		<v3kn_logout>您确定要从V3KN登出吗？</v3kn_logout>
+		<account_success_logout>已成功登出。</account_success_logout>
+		<change_online_id>更改在线ID</change_online_id>
+		<change_v3kn_online_id>更改V3KN在线ID</change_v3kn_online_id>
+		<new_username>新用户名</new_username>
+		<online_id_success_changed>在线ID已成功更改为{}。</online_id_success_changed>
+		<change_password>更改密码</change_password>
+		<change_v3kn_password>更改V3KN密码</change_v3kn_password>
+		<current_password>当前密码</current_password>
+		<new_password>新密码</new_password>
+		<current_password_incorrect>当前密码不正确。</current_password_incorrect>
+		<password_success_changed>用户{}的密码已成功更改。</password_success_changed>
+		<change_about_me>更改自我介绍</change_about_me>
+		<change_v3kn_about_me>更改V3KN自我介绍</change_v3kn_about_me>
+		<about_me>自我介绍</about_me>
+		<about_me_success_changed>用户{}的自我介绍已成功更改。</about_me_success_changed>
+		<change_avatar>更改虚拟形象</change_avatar>
+		<change_v3kn_avatar>更改V3KN虚拟形象</change_v3kn_avatar>
+		<browse>浏览…</browse>
+		<load_image_failed>加载图像失败。</load_image_failed>
+		<file_dialog_error>文件对话框错误：{}。</file_dialog_error>
+		<uploading>正在上传…</uploading>
+		<processing_image_failed>无法加载图像进行处理。</processing_image_failed>
+		<change_panel>更改面板</change_panel>
+		<change_v3kn_panel>更改V3KN面板</change_v3kn_panel>
+		<crop_v3kn_panel>裁剪V3KN面板</crop_v3kn_panel>
+		<selected>已选择：</selected>
+		<change_server>更改服务器</change_server>
+		<change_v3kn_server>更改V3KN服务器</change_v3kn_server>
+		<server>服务器</server>
+	</vita3k_network>
 
 	<vita3k_update name="Vita3K更新">
  		<new_version_available>检测到新版本的Vita3K。</new_version_available>

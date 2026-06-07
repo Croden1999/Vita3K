@@ -480,7 +480,7 @@ Asia. (Umumnya Direkomendasikan)</firmware_font_package_note>
 	</live_area>
 
 	<message>
-		<load_app_failed>Gagal untuk memuat "{}".
+		<load_app_failed>Gagal untuk memuat {}.
 Periksa vita3k.log untuk melihat keluaran konsol untuk detailnya.
 1. Apakah Kamu sudah menginstal firmware?
 2. Buat PS Vita aplikasi/game Kamu sendiri dan instal di Vita3K.

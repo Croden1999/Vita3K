@@ -442,7 +442,10 @@ void init_lang(LangState &lang, EmuEnvState &emuenv) {
                 // User Management
                 set_lang_string(lang.user_management, lang_child.child("user_management"));
 
-                // Vita3k Update
+                // Vita3K Network
+                set_lang_string(lang.vita3k_network, lang_child.child("vita3k_network"));
+
+                // Vita3K Update
                 set_lang_string(lang.vita3k_update, lang_child.child("vita3k_update"));
 
                 // Welcome

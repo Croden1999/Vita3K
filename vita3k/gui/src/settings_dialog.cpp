@@ -765,6 +765,22 @@ void draw_settings_dialog(GuiState &gui, EmuEnvState &emuenv) {
         }
         if (ImGui::Button(lang.core["refresh_list"].c_str()))
             get_modules_list(gui, emuenv);
+        ImGui::SameLine();
+        const auto modules_path{ emuenv.pref_path / "vs0/sys/external/" };
+        if (fs::exists(modules_path / "libpaf.suprx")) {
+            if (ImGui::Button(lang.core["rename_libpaf"].c_str())) {
+                fs::rename(modules_path / "libpaf.suprx", modules_path / "libpaf_rename.suprx");
+                LOG_INFO("Rename libpaf successfully.");
+            }
+            SetTooltipEx(lang.core["libpaf_rename"].c_str());
+        } else if (fs::exists(modules_path / "libpaf_rename.suprx")) {
+            if (ImGui::Button(lang.core["restore_libpaf"].c_str())) {
+                fs::rename(modules_path / "libpaf_rename.suprx", modules_path / "libpaf.suprx");
+                LOG_INFO("Restore libpaf successfully.");
+            }
+            SetTooltipEx(lang.core["libpaf_restore"].c_str());
+        }
+        
         break;
     }
     case SettingsDialogSection::CPU: {
@@ -1678,7 +1694,6 @@ void draw_settings_dialog(GuiState &gui, EmuEnvState &emuenv) {
         save_config(gui, emuenv);
         if (is_apply)
             set_config(emuenv);
-
         close_settings_dialog();
     }
     SetTooltipEx(lang.main_window["keep_changes"].c_str());

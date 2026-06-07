@@ -52,7 +52,6 @@
 		</path>
 		<live_area>
 			<manual>설명서</manual>
-			<update>업데이트</update>
 		</live_area>
 		<delete>
 			<delete_app>이 애플리케이션 및 모든 관련 데이터(저장 데이터 포함)를 삭제합니다.</delete_app>
@@ -83,6 +82,8 @@
 		<an_error_occurred>에러기 발생했습니다.
 에러  코드: {}</an_error_occurred>
 		<cancel>취소</cancel>
+		<connecting_please_wait>접속중입니다...
+잠시 기다려 주십시오.</connecting_please_wait>
 		<close>닫다</close>
 		<could_not_load>불러오지 못했습니다.</could_not_load>
 		<could_not_save>저장하지 못했습니다.</could_not_save>
@@ -91,10 +92,15 @@
 		<file_corrupted>파일이 손상되어 있습니다.</file_corrupted>
 		<microphone_disabled>마이크를 활성화해 주십시오.</microphone_disabled>
 		<no>아니요</no>
+		<ok>OK</ok>
 		<please_wait>잠시 기다려 주십시오...</please_wait>
 		<select_all>모두 선택</select_all>
 		<select>선택</select>
 		<yes>예</yes>
+		<could_not_connect_server>서버에 접속하지 못했습니다.</could_not_connect_server>
+		<must_sign_in_vita3k_network>이 기능을 이용하시려면 Vita3K Network에 로그인해야 합니다.</must_sign_in_vita3k_network>
+		<could_not_connect_internet>인터넷에 접속하지 못했습니다.</could_not_connect_internet>
+		<vita3k_network_connection_lost>Vita3K Network의 네트워크 접속이 끊어졌습니다.</vita3k_network_connection_lost>
 		<wday>
 			<day>일요일</day>
 			<day>월요일</day>
@@ -305,7 +311,31 @@ Vita3K를 즐기러 GOGO!</completed_setup>
 		<continue>계속</continue>
 	</live_area>
 
+	<online_storage>
+		<save_data_auto_upload>저장 데이터 자동 업로드</save_data_auto_upload>
+		<copying>복사중입니다...</copying>
+		<download>다운로드</download>
+		<eligible>권리 있음</eligible>
+		<ineligible>권리 없음</ineligible>
+		<location>위치</location>
+		<memory_card>메모리 카드</memory_card>
+		<minutes_left>남은 시간 {} 분</minutes_left>
+		<online_storage>온라인 스토리지</online_storage>
+		<cloud>Cloud</cloud>
+		<overwrite_saved_data>저장 데이터를 덮어쓰시겠습니까?</overwrite_saved_data>
+		<seconds_left>남은 시간 {} 초</seconds_left>
+		<size>크기</size>
+		<trophy_earning>트로피 획득</trophy_earning>
+		<updated>갱신일</updated>
+		<upload>업로드</upload>
+		<uploaded>업로드한 날짜</uploaded>
+		<local>Local</local>
+	</online_storage>
+
 	<settings name="설정">
+		<sound_display name="사운드 & 디스플레이">
+			<system_music>시스템 음악</system_music>
+		</sound_display>
 		<theme_background name="테마 & 배경">
 			<default>오리지널</default>
 			<theme name="테마">
@@ -363,6 +393,8 @@ Vita3K를 즐기러 GOGO!</completed_setup>
 	</settings>
 
 	<settings_dialog name="설정">
+		<camera name="카메라">
+		</camera>
 		<system name="시스템">
 		</system>
 		<network name="네트워크">
@@ -411,9 +443,72 @@ Vita3K를 즐기러 GOGO!</completed_setup>
 		<user_deleted>유저를 삭제했습니다.</user_deleted>
 		<choose_avatar>아바타 선택하기</choose_avatar>
 		<reset_avatar>아바타 리셋</reset_avatar>
+		<user>User</user>
 		<confirm>확인</confirm>
 		<automatic_user_login>유저를 자동 로그인</automatic_user_login>
 	</user_management>
+
+	<vita3k_network name="V3KN Account Management">
+		<server_name>Server: </server_name>
+		<signed_in_id>Signed In - ID: </signed_in_id>
+		<offline_id>Offline - ID: </offline_id>
+		<not_signed_in_id>Not Signed In - ID: </not_signed_in_id>
+		<created_at>Created At: </created_at>
+		<quota_used>Quota Used: </quota_used>
+		<create_account>Create Account</create_account>
+		<create_v3kn_account>Create V3KN Account</create_v3kn_account>
+		<account_username_password>Please enter a username and password to create your V3KN account.</account_username_password>
+		<account_username>Username must start with a letter and contain 3-16 characters (letters, numbers, _ or -).</account_username>
+		<account_password>Password must be at least 8 characters long.</account_password>
+		<username>Username</username>
+		<password>Password</password>
+		<confirm_password>Confirm Password</confirm_password>
+		<password_not_match>Password and confirmation do not match.</password_not_match>
+		<account_success_created>Account created successfully for user {}.</account_success_created>
+		<unexpected_response_format>Unexpected response format from server: {}.</unexpected_response_format>
+		<login>Login</login>
+		<v3kn_login>V3KN Login</v3kn_login>
+		<account_success_login>Login on V3KN successfully for user {}.</account_success_login>
+		<testing>Testing...</testing>
+		<test_connection>Test Connection</test_connection>
+		<test_saved_credentials>Test connection to V3KN server with saved credentials.</test_saved_credentials>
+		<refresh_quota>Refresh Quota</refresh_quota>
+		<quota_refreshed>Quota refreshed: </quota_refreshed>
+		<delete_account>Delete Account</delete_account>
+		<delete_v3kn_account>Delete V3KN Account</delete_v3kn_account>
+		<account_success_deleted>Account V3KN deleted successfully for user {}.</account_success_deleted>
+		<logout>Logout</logout>
+		<v3kn_logout>Are you sure you want to logout from V3KN?</v3kn_logout>
+		<account_success_logout>Logged out successfully.</account_success_logout>
+		<change_online_id>Change Online ID</change_online_id>
+		<change_v3kn_online_id>Change V3KN Online ID</change_v3kn_online_id>
+		<new_username>New Username</new_username>
+		<online_id_success_changed>Online ID successfully changed to {}.</online_id_success_changed>
+		<change_password>Change Password</change_password>
+		<change_v3kn_password>Change V3KN Password</change_v3kn_password>
+		<current_password>Current Password</current_password>
+		<new_password>New Password</new_password>
+		<current_password_incorrect>Current password is incorrect.</current_password_incorrect>
+		<password_success_changed>Password changed successfully for user {}.</password_success_changed>
+		<change_about_me>Change About Me</change_about_me>
+		<change_v3kn_about_me>Change V3KN About Me</change_v3kn_about_me>
+		<about_me>자기소개</about_me>
+		<about_me_success_changed>About Me changed successfully for user {}.</about_me_success_changed>
+		<change_avatar>Change Avatar</change_avatar>
+		<change_v3kn_avatar>Change V3KN Avatar</change_v3kn_avatar>
+		<browse>Browse...</browse>
+		<load_image_failed>Failed to load image.</load_image_failed>
+		<file_dialog_error>File dialog error: {}.</file_dialog_error>
+		<uploading>Uploading...</uploading>
+		<processing_image_failed>Failed to load image for processing.</processing_image_failed>
+		<change_panel>Change Panel</change_panel>
+		<change_v3kn_panel>Change V3KN Panel</change_v3kn_panel>
+		<crop_v3kn_panel>Crop V3KN Panel</crop_v3kn_panel>
+		<selected>Selected: </selected>
+		<change_server>Change Server</change_server>
+		<change_v3kn_server>Change V3KN Server</change_v3kn_server>
+		<server>Server</server>
+	</vita3k_network>
 
 	<vita3k_update name="Vita3K 업데이트">
  		<new_version_available>새 버전의 Vita3K 있습니다.</new_version_available>

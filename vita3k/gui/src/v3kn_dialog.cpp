@@ -182,7 +182,9 @@ void draw_v3kn_dialog(GuiState &gui, EmuEnvState &emuenv) {
     const ImVec2 POPUP_SIZE = ImGui::GetWindowSize();
     const ImVec2 POPUP_POS = ImGui::GetWindowPos();
 
-    const auto title = "V3KN Account Management";
+    auto &lang = gui.lang.vita3k_network;
+
+    const auto title = lang["title"].c_str();
     const auto FONT_SCALE = 0.81f;
     const auto title_size = ImGui::CalcTextSize(title);
     const auto BLOCK_TITLE_SIZE_HEIGHT = 40.f * SCALE.y;
@@ -295,6 +297,7 @@ void draw_v3kn_dialog(GuiState &gui, EmuEnvState &emuenv) {
 
     const std::string OK_STR = common_lang["ok"];
     const std::string CANCEL_STR = common_lang["cancel"];
+    const std::string CLOSE_STR = common_lang["close"];
 
     const auto popup_flags = ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings;
 
@@ -311,7 +314,7 @@ void draw_v3kn_dialog(GuiState &gui, EmuEnvState &emuenv) {
             TextColoredCentered(GUI_COLOR_TEXT, text.c_str(), 20.f * SCALE.x);
             ImGui::SetCursorPos(ImVec2((popup_width_size - SMALL_BUTTON_SIZE.x) / 2.f, POPUP_SIZE.y - SMALL_BUTTON_SIZE.y - (16.f * SCALE.y)));
             ImGui::BeginDisabled(is_waiting_result);
-            if (ImGui::Button("OK", SMALL_BUTTON_SIZE)) {
+            if (ImGui::Button(OK_STR.c_str(), SMALL_BUTTON_SIZE)) {
                 ImGui::CloseCurrentPopup();
                 if (result_state == V3knResultState::PENDING_ACK) {
                     result_state = V3knResultState::CLOSE_PARENT;
@@ -338,7 +341,7 @@ void draw_v3kn_dialog(GuiState &gui, EmuEnvState &emuenv) {
     ImGui::SetCursorPosY(FIRST_INFO_POS_Y);
     const auto selected_server = account_state.selected_server_index;
     if (selected_server < V3KN_SERVER_LIST_NAME.size())
-        ImGui::Text("Server: %s", V3KN_SERVER_LIST_NAME[selected_server]);
+        ImGui::Text("%s%s", lang["server_name"].c_str(), V3KN_SERVER_LIST_NAME[selected_server]);
 
     const auto draw_list = ImGui::GetWindowDrawList();
     const auto STATUS_CIRCLE_RADIUS = ImGui::GetFontSize() / 2.f;
@@ -349,14 +352,14 @@ void draw_v3kn_dialog(GuiState &gui, EmuEnvState &emuenv) {
     if (!user_info.token.empty()) {
         if (v3kn::is_v3kn_logged_in()) {
             status_color = IM_COL32(14, 138, 22, 255);
-            status_text = fmt::format("Signed In - ID: {}", user_info.online_id);
+            status_text = lang["signed_in_id"].c_str() + user_info.online_id;
         } else {
             status_color = IM_COL32(224, 138, 30, 255);
-            status_text = fmt::format("Offline - ID: {}", user_info.online_id);
+            status_text = lang["offline_id"].c_str() + user_info.online_id;
         }
     } else {
         status_color = IM_COL32(255, 0, 0, 255);
-        status_text = "Not Signed In - ID: " + (user_info.online_id.empty() ? std::string("-") : user_info.online_id);
+        status_text = lang["not_signed_in_id"].c_str() + (user_info.online_id.empty() ? std::string("-") : user_info.online_id);
     }
 
     draw_list->AddCircleFilled(circle_pos, STATUS_CIRCLE_RADIUS, status_color);
@@ -371,9 +374,9 @@ void draw_v3kn_dialog(GuiState &gui, EmuEnvState &emuenv) {
         created_at = fmt::format("{} {} {}", CREATED_AT[DateTime::DATE_MINI], CREATED_AT[DateTime::CLOCK], emuenv.cfg.sys_time_format == SCE_SYSTEM_PARAM_TIME_FORMAT_12HOUR ? CREATED_AT[DateTime::DAY_MOMENT] : "");
     }
     ImGui::SetCursorPosY(FIRST_INFO_POS_Y + INFO_SIZE_HEIGHT * 2);
-    ImGui::Text("Created At: %s", created_at.c_str());
+    ImGui::Text("%s%s", lang["created_at"].c_str(), created_at.c_str());
     ImGui::SetCursorPosY(FIRST_INFO_POS_Y + (INFO_SIZE_HEIGHT * 3));
-    ImGui::Text("Quota Used: %s / %s",
+    ImGui::Text("%s%s / %s", lang["quota_used"].c_str(),
         user_info.quota_used == 0 ? "-" : get_unit_size(user_info.quota_used).c_str(),
         user_info.quota_total == 0 ? "-" : get_unit_size(user_info.quota_total).c_str());
 
@@ -415,26 +418,26 @@ void draw_v3kn_dialog(GuiState &gui, EmuEnvState &emuenv) {
 
     ImGui::BeginDisabled(v3kn::is_v3kn_logged_in() && result_state == V3knResultState::NONE);
 
-    // Create Account Button
+    // Create Account
     ImGui::SetCursorPosX((WINDOW_SIZE.x / 2.f) - BUTTON_SIZE.x - (20.f * SCALE.x));
-    if (ImGui::Button("Create Account", BUTTON_SIZE)) {
+    if (ImGui::Button(lang["create_account"].c_str(), BUTTON_SIZE)) {
         result_state = V3knResultState::NONE;
         ImGui::OpenPopup("V3KN Create");
     }
 
     if (ImGui::BeginPopupModal("V3KN Create", nullptr, popup_flags)) {
-        const auto title_popup = "Create V3KN Account";
+        const auto title_popup = lang["create_v3kn_account"].c_str();
         ImGui::SetCursorPosX((ImGui::GetWindowWidth() - ImGui::CalcTextSize(title_popup).x) / 2.f);
         ImGui::TextColored(GUI_COLOR_TEXT_TITLE, "%s", title_popup);
         ImGui::Separator();
 
-        ImGui::TextColored(GUI_COLOR_TEXT_TITLE, "Please enter a username and password to create your V3KN account.");
-        ImGui::TextColored(GUI_COLOR_TEXT, "Username must start with a letter and contain 3–16 characters (letters, numbers, _ or -).");
-        ImGui::TextColored(GUI_COLOR_TEXT, "Password must be at least 8 characters long.");
+        ImGui::TextColored(GUI_COLOR_TEXT_TITLE, "%s", lang["account_username_password"].c_str());
+        ImGui::TextColored(GUI_COLOR_TEXT, "%s", lang["account_username"].c_str());
+        ImGui::TextColored(GUI_COLOR_TEXT, "%s", lang["account_password"].c_str());
 
-        ImGui::InputText("Username", username, sizeof(username), ImGuiInputTextFlags_CharsNoBlank);
-        ImGui::InputText("Password", password, sizeof(password), ImGuiInputTextFlags_Password);
-        const auto res = ImGui::InputText("Confirm Password", confirm, sizeof(confirm), ImGuiInputTextFlags_EnterReturnsTrue | ImGuiInputTextFlags_Password);
+        ImGui::InputText(lang["username"].c_str(), username, sizeof(username), ImGuiInputTextFlags_CharsNoBlank);
+        ImGui::InputText(lang["password"].c_str(), password, sizeof(password), ImGuiInputTextFlags_Password);
+        const auto res = ImGui::InputText(lang["confirm_password"].c_str(), confirm, sizeof(confirm), ImGuiInputTextFlags_EnterReturnsTrue | ImGuiInputTextFlags_Password);
 
         const std::string username_str(username);
         const std::string password_str(password);
@@ -445,14 +448,14 @@ void draw_v3kn_dialog(GuiState &gui, EmuEnvState &emuenv) {
             ImGui::OpenPopup("Result");
             if (std::string(password) != std::string(confirm)) {
                 result_state = V3knResultState::NONE;
-                result_message = "Password and confirmation do not match.";
+                result_message = lang["password_not_match."].c_str();
             } else {
                 const std::string derived_password = derive_password(password);
                 const std::string base64_password = base64_encode(derived_password);
                 const std::string requested_username = username;
                 const UserInfo current_user_info = user_info;
                 is_waiting_result = true;
-                std::thread([&emuenv, requested_username, base64_password, current_user_info]() {
+                std::thread([&emuenv, requested_username, base64_password, current_user_info, &lang]() {
                     const auto res = v3kn::v3kn_create(current_user_info, requested_username, base64_password);
                     V3knPendingResult result;
                     result.action = V3knPendingAction::CREATE;
@@ -464,9 +467,9 @@ void draw_v3kn_dialog(GuiState &gui, EmuEnvState &emuenv) {
                         std::regex regex_pattern(R"(OK:([^:]+))");
                         if (std::regex_search(res.body, match, regex_pattern) && (match.size() == 2)) {
                             result.token = match[1];
-                            result.message = fmt::format("Account created successfully for user {}", requested_username);
+                            result.message = fmt::format(fmt::runtime(lang["account_success_created"]), requested_username);
                         } else {
-                            result.message = fmt::format("Unexpected response format from server: {}", res.body);
+                            result.message = fmt::format(fmt::runtime(lang["unexpected_response_format"]), res.body);
                         }
                     } else {
                         result.message = v3kn::get_v3kn_error_message(emuenv, res);
@@ -497,21 +500,21 @@ void draw_v3kn_dialog(GuiState &gui, EmuEnvState &emuenv) {
         ImGui::EndPopup();
     }
 
-    // Login Button
+    // Login
     ImGui::SetCursorPosX((WINDOW_SIZE.x / 2.f) - BUTTON_SIZE.x - (20.f * SCALE.x));
-    if (ImGui::Button("Login", BUTTON_SIZE)) {
+    if (ImGui::Button(lang["login"].c_str(), BUTTON_SIZE)) {
         result_state = V3knResultState::NONE;
         ImGui::OpenPopup("V3KN Login");
     }
 
     if (ImGui::BeginPopupModal("V3KN Login", nullptr, popup_flags)) {
-        const auto title_popup = "V3KN Login";
+        const auto title_popup = lang["v3kn_login"].c_str();
         ImGui::SetCursorPosX((ImGui::GetWindowWidth() - ImGui::CalcTextSize(title_popup).x) / 2.f);
         ImGui::TextColored(GUI_COLOR_TEXT_TITLE, "%s", title_popup);
         ImGui::Separator();
 
-        ImGui::InputText("Username", username, sizeof(username));
-        auto res = ImGui::InputText("Password", password, sizeof(password), ImGuiInputTextFlags_Password | ImGuiInputTextFlags_EnterReturnsTrue);
+        ImGui::InputText(lang["username"].c_str(), username, sizeof(username));
+        auto res = ImGui::InputText(lang["password"].c_str(), password, sizeof(password), ImGuiInputTextFlags_Password | ImGuiInputTextFlags_EnterReturnsTrue);
 
         ImGui::BeginDisabled(is_waiting_result || std::string(password).empty() || std::string(username).empty());
         ImGui::SetCursorPosX((ImGui::GetWindowWidth() / 2.f) - SMALL_BUTTON_SIZE.x - (20.f * SCALE.x));
@@ -523,7 +526,7 @@ void draw_v3kn_dialog(GuiState &gui, EmuEnvState &emuenv) {
             result_state = V3knResultState::NONE;
             is_waiting_result = true;
             ImGui::OpenPopup("Result");
-            std::thread([&emuenv, requested_username, base64_password, current_user_info]() {
+            std::thread([&emuenv, requested_username, base64_password, current_user_info, &lang]() {
                 const auto res = v3kn::v3kn_login(current_user_info, requested_username, base64_password);
                 V3knPendingResult result;
                 result.action = V3knPendingAction::LOGIN;
@@ -535,7 +538,7 @@ void draw_v3kn_dialog(GuiState &gui, EmuEnvState &emuenv) {
                     if (std::regex_search(res.body, match, regex_pattern) && (match.size() == 3)) {
                         result.online_id = match[1];
                         result.token = match[2];
-                        result.message = "Login on V3KN successfully for user " + result.online_id;
+                        result.message = fmt::format(fmt::runtime(lang["account_success_login"]), result.online_id);
                     } else {
                         result.message = v3kn::get_v3kn_error_message(emuenv, res);
                     }
@@ -571,7 +574,7 @@ void draw_v3kn_dialog(GuiState &gui, EmuEnvState &emuenv) {
         ImGui::SetCursorPosX((WINDOW_SIZE.x / 2.f) - BUTTON_SIZE.x - (20.f * SCALE.x));
         static bool is_testing_connection = false;
         ImGui::BeginDisabled(is_waiting_result || is_testing_connection);
-        if (ImGui::Button(is_testing_connection ? "Testing..." : "Test Connection", BUTTON_SIZE)) {
+        if (ImGui::Button(is_testing_connection ? lang["testing"].c_str() : lang["test_connection"].c_str(), BUTTON_SIZE)) {
             is_testing_connection = true;
             std::thread([&gui, &emuenv]() {
                 v3kn::init_v3kn_user_info(gui, emuenv);
@@ -579,18 +582,18 @@ void draw_v3kn_dialog(GuiState &gui, EmuEnvState &emuenv) {
             }).detach();
         }
         ImGui::EndDisabled();
-        SetTooltipEx("Test connection to V3KN server with saved credentials");
+        SetTooltipEx(lang["test_saved_credentials"].c_str());
     }
 
     ImGui::BeginDisabled(!v3kn::is_v3kn_logged_in() && result_state == V3knResultState::NONE);
 
-    // Refresh quota button
+    // Refresh Quota
     ImGui::SetCursorPosX((WINDOW_SIZE.x / 2.f) - BUTTON_SIZE.x - (20.f * SCALE.x));
     ImGui::BeginDisabled(is_waiting_result);
-    if (ImGui::Button("Refresh Quota", BUTTON_SIZE)) {
+    if (ImGui::Button(lang["refresh_quota"].c_str(), BUTTON_SIZE)) {
         const UserInfo current_user_info = user_info;
         is_waiting_result = true;
-        std::thread([&emuenv, current_user_info]() {
+        std::thread([&emuenv, current_user_info, &lang]() {
             const std::string url = v3kn::get_v3kn_server_url(current_user_info.host, "v3kn/quota");
             const auto res = net_utils::get_web_response_ex(url, current_user_info.token);
             V3knPendingResult result;
@@ -603,7 +606,7 @@ void draw_v3kn_dialog(GuiState &gui, EmuEnvState &emuenv) {
                     result.quota_used = std::strtoull(match[1].str().c_str(), nullptr, 10);
                     result.quota_total = std::strtoull(match[2].str().c_str(), nullptr, 10);
                     result.has_quota = true;
-                    result.message = fmt::format("Quota refreshed: {} / {}", get_unit_size(result.quota_used), get_unit_size(result.quota_total));
+                    result.message = lang["quota_refreshed"].c_str() + get_unit_size(result.quota_used) + " / " + get_unit_size(result.quota_total);
                 } else {
                     result.message = v3kn::get_v3kn_error_message(emuenv, res);
                 }
@@ -619,21 +622,20 @@ void draw_v3kn_dialog(GuiState &gui, EmuEnvState &emuenv) {
         ImGui::OpenPopup("Result");
     }
     ImGui::EndDisabled();
-    SetTooltipEx("Refresh quota");
     result_popup();
 
-    // Delete account button
+    // Delete Account
     ImGui::SetCursorPosX((WINDOW_SIZE.x / 2.f) - BUTTON_SIZE.x - (20.f * SCALE.x));
-    if (ImGui::Button("Delete Account", BUTTON_SIZE))
+    if (ImGui::Button(lang["delete_account"].c_str(), BUTTON_SIZE))
         ImGui::OpenPopup("V3KN Delete");
 
     if (ImGui::BeginPopupModal("V3KN Delete", nullptr, popup_flags)) {
-        const auto title_popup = "Delete V3KN Account";
+        const auto title_popup = lang["delete_v3kn_account"].c_str();
         ImGui::SetCursorPosX((ImGui::GetWindowWidth() - ImGui::CalcTextSize(title_popup).x) / 2.f);
         ImGui::TextColored(GUI_COLOR_TEXT_TITLE, "%s", title_popup);
         ImGui::Separator();
 
-        ImGui::InputText("Password", password, sizeof(password), ImGuiInputTextFlags_Password);
+        ImGui::InputText(lang["password"].c_str(), password, sizeof(password), ImGuiInputTextFlags_Password);
         ImGui::BeginDisabled(is_waiting_result || std::string(password).empty());
         ImGui::SetCursorPosX((ImGui::GetWindowWidth() / 2.f) - SMALL_BUTTON_SIZE.x - (20.f * SCALE.x));
         if (ImGui::Button(OK_STR.c_str(), SMALL_BUTTON_SIZE)) {
@@ -643,13 +645,13 @@ void draw_v3kn_dialog(GuiState &gui, EmuEnvState &emuenv) {
             const std::string current_online_id = user_info.online_id;
             is_waiting_result = true;
             ImGui::OpenPopup("Result");
-            std::thread([&emuenv, current_online_id, base64_password, current_user_info]() {
+            std::thread([&emuenv, current_online_id, base64_password, current_user_info, &lang]() {
                 const auto res = v3kn::v3kn_delete(current_user_info, base64_password);
                 V3knPendingResult result;
                 result.action = V3knPendingAction::DELETE_ACCOUNT;
                 result.response = res;
                 if (res.body.starts_with("OK:"))
-                    result.message = "Account V3KN deleted successfully for user " + current_online_id;
+                    result.message = fmt::format(fmt::runtime(lang["account_success_deleted"]), current_online_id);
                 else
                     result.message = v3kn::get_v3kn_error_message(emuenv, res);
                 {
@@ -674,12 +676,13 @@ void draw_v3kn_dialog(GuiState &gui, EmuEnvState &emuenv) {
         ImGui::EndPopup();
     }
 
+    // Logout
     ImGui::SetCursorPosX((WINDOW_SIZE.x / 2.f) - BUTTON_SIZE.x - (20.f * SCALE.x));
-    if (ImGui::Button("Logout", BUTTON_SIZE))
+    if (ImGui::Button(lang["logout"].c_str(), BUTTON_SIZE))
         ImGui::OpenPopup("Confirm Logout");
 
     if (ImGui::BeginPopupModal("Confirm Logout", nullptr, popup_flags)) {
-        ImGui::Text("Are you sure you want to logout from V3KN?");
+        ImGui::Text("%s", lang["v3kn_logout"].c_str());
         ImGui::SetCursorPosX((ImGui::GetWindowWidth() - (SMALL_BUTTON_SIZE.x * 2.f) - (40.f * SCALE.x)) / 2.f);
         if (ImGui::Button(common_lang["no"].c_str(), SMALL_BUTTON_SIZE))
             ImGui::CloseCurrentPopup();
@@ -692,7 +695,7 @@ void draw_v3kn_dialog(GuiState &gui, EmuEnvState &emuenv) {
             std::thread([&gui, &emuenv]() {
                 v3kn::init_v3kn_user_info(gui, emuenv);
             }).detach();
-            result_message = "Logged out successfully.";
+            result_message = lang["account_success_logout"].c_str();
             ImGui::CloseCurrentPopup();
         }
         result_popup();
@@ -704,18 +707,19 @@ void draw_v3kn_dialog(GuiState &gui, EmuEnvState &emuenv) {
         ImGui::EndPopup();
     }
 
+    // Change Online ID
     ImGui::SetCursorPosY(AFTER_INFO_POS);
     ImGui::SetCursorPosX((WINDOW_SIZE.x / 2.f) + (20.f * SCALE.x));
-    if (ImGui::Button("Change Online ID", BUTTON_SIZE))
+    if (ImGui::Button(lang["change_online_id"].c_str(), BUTTON_SIZE))
         ImGui::OpenPopup("V3KN Change Online ID");
 
     if (ImGui::BeginPopupModal("V3KN Change Online ID", nullptr, popup_flags)) {
-        const auto title_popup = "Change V3KN Online ID";
+        const auto title_popup = lang["change_v3kn_online_id"].c_str();
         ImGui::SetCursorPosX((ImGui::GetWindowWidth() - ImGui::CalcTextSize(title_popup).x) / 2.f);
         ImGui::TextColored(GUI_COLOR_TEXT_TITLE, "%s", title_popup);
         ImGui::Separator();
 
-        ImGui::InputText("New Username", username, sizeof(username), ImGuiInputTextFlags_CharsNoBlank);
+        ImGui::InputText(lang["new_username"].c_str(), username, sizeof(username), ImGuiInputTextFlags_CharsNoBlank);
         ImGui::BeginDisabled(is_waiting_result || std::string(username).empty());
         ImGui::SetCursorPosX((ImGui::GetWindowWidth() / 2.f) - SMALL_BUTTON_SIZE.x - (20.f * SCALE.x));
         if (ImGui::Button(OK_STR.c_str(), SMALL_BUTTON_SIZE)) {
@@ -723,14 +727,14 @@ void draw_v3kn_dialog(GuiState &gui, EmuEnvState &emuenv) {
             const UserInfo current_user_info = user_info;
             is_waiting_result = true;
             ImGui::OpenPopup("Result");
-            std::thread([&emuenv, new_online_id, current_user_info]() {
+            std::thread([&emuenv, new_online_id, current_user_info, &lang]() {
                 const auto res = v3kn::v3kn_change_online_id(current_user_info, new_online_id);
                 V3knPendingResult result;
                 result.action = V3knPendingAction::CHANGE_ONLINE_ID;
                 result.response = res;
                 result.online_id = new_online_id;
                 if (res.body.starts_with("OK:"))
-                    result.message = "Online ID successfully changed to " + new_online_id;
+                    result.message = fmt::format(fmt::runtime(lang["online_id_success_changed"]), new_online_id);
                 else
                     result.message = v3kn::get_v3kn_error_message(emuenv, res);
                 {
@@ -755,25 +759,26 @@ void draw_v3kn_dialog(GuiState &gui, EmuEnvState &emuenv) {
         ImGui::EndPopup();
     }
 
+    // Change Password
     ImGui::SetCursorPosX((WINDOW_SIZE.x / 2.f) + (20.f * SCALE.x));
-    if (ImGui::Button("Change Password", BUTTON_SIZE))
+    if (ImGui::Button(lang["change_password"].c_str(), BUTTON_SIZE))
         ImGui::OpenPopup("V3KN Change Password");
 
     if (ImGui::BeginPopupModal("V3KN Change Password", nullptr, popup_flags)) {
-        const auto title_popup = "Change V3KN Password";
+        const auto title_popup = lang["change_v3kn_password"].c_str();
         ImGui::SetCursorPosX((ImGui::GetWindowWidth() - ImGui::CalcTextSize(title_popup).x) / 2.f);
         ImGui::TextColored(GUI_COLOR_TEXT_TITLE, "%s", title_popup);
         ImGui::Separator();
 
-        ImGui::InputText("Current Password", password, sizeof(password), ImGuiInputTextFlags_Password);
-        ImGui::InputText("New Password", confirm, sizeof(confirm), ImGuiInputTextFlags_Password);
+        ImGui::InputText(lang["current_password"].c_str(), password, sizeof(password), ImGuiInputTextFlags_Password);
+        ImGui::InputText(lang["new_password"].c_str(), confirm, sizeof(confirm), ImGuiInputTextFlags_Password);
         ImGui::BeginDisabled(is_waiting_result || std::string(password).empty() || std::string(confirm).empty());
         ImGui::SetCursorPosX((ImGui::GetWindowWidth() / 2.f) - SMALL_BUTTON_SIZE.x - (20.f * SCALE.x));
         if (ImGui::Button(OK_STR.c_str(), SMALL_BUTTON_SIZE)) {
             const std::string derived_current_password = derive_password(password);
             const std::string base64_current_password = base64_encode(derived_current_password);
             if (base64_current_password != user_info.password) {
-                result_message = "Current password is incorrect.";
+                result_message = lang["current_password_incorrect"].c_str();
                 ImGui::OpenPopup("Result");
             } else {
                 const std::string derived_new_password = derive_password(confirm);
@@ -781,7 +786,7 @@ void draw_v3kn_dialog(GuiState &gui, EmuEnvState &emuenv) {
                 const UserInfo current_user_info = user_info;
                 is_waiting_result = true;
                 ImGui::OpenPopup("Result");
-                std::thread([&emuenv, base64_current_password, base64_new_password, current_user_info]() {
+                std::thread([&emuenv, base64_current_password, base64_new_password, current_user_info, &lang]() {
                     const auto res = v3kn::v3kn_change_password(current_user_info, base64_current_password, base64_new_password);
                     V3knPendingResult result;
                     result.action = V3knPendingAction::CHANGE_PASSWORD;
@@ -792,7 +797,7 @@ void draw_v3kn_dialog(GuiState &gui, EmuEnvState &emuenv) {
                         std::regex regex_pattern(R"(OK:([^:]+))");
                         if (std::regex_search(res.body, match, regex_pattern) && (match.size() == 2)) {
                             result.token = match[1];
-                            result.message = "Password changed successfully for user " + current_user_info.online_id;
+                            result.message = fmt::format(fmt::runtime(lang["password_success_changed"]), current_user_info.online_id);
                         } else {
                             result.message = v3kn::get_v3kn_error_message(emuenv, res);
                         }
@@ -823,32 +828,33 @@ void draw_v3kn_dialog(GuiState &gui, EmuEnvState &emuenv) {
         ImGui::EndPopup();
     }
 
-    // Change About Me Button
+    // Change About Me
     ImGui::SetCursorPosX((WINDOW_SIZE.x / 2.f) + (20.f * SCALE.x));
-    if (ImGui::Button("Change About Me", BUTTON_SIZE))
+    if (ImGui::Button(lang["change_about_me"].c_str(), BUTTON_SIZE))
         ImGui::OpenPopup("V3KN Change About Me");
 
     if (ImGui::BeginPopupModal("V3KN Change About Me", nullptr, popup_flags)) {
-        const auto title_popup = "Change V3KN About Me";
+        const auto title_popup = lang["change_v3kn_about_me"].c_str();
         ImGui::SetCursorPosX((ImGui::GetWindowWidth() - ImGui::CalcTextSize(title_popup).x) / 2.f);
         ImGui::TextColored(GUI_COLOR_TEXT_TITLE, "%s", title_popup);
         ImGui::Separator();
         const ImVec2 BOX_TEXT_SIZE = ImVec2(368.f * SCALE.x, 50.f * SCALE.y);
         ImGui::SetNextItemWidth(BOX_TEXT_SIZE.x);
-        const auto res = ImGui::InputText("About Me", about_me, sizeof(about_me), ImGuiInputTextFlags_EnterReturnsTrue);
+        const auto res = ImGui::InputText(lang["about_me"].c_str(), about_me, sizeof(about_me), ImGuiInputTextFlags_EnterReturnsTrue);
         ImGui::BeginDisabled(is_waiting_result || std::string(about_me).empty());
+        ImGui::SetCursorPosX((ImGui::GetWindowWidth() / 2.f) - SMALL_BUTTON_SIZE.x - (20.f * SCALE.x));
         if (ImGui::Button(OK_STR.c_str(), SMALL_BUTTON_SIZE) || res) {
             const std::string about_me_str(about_me);
             const UserInfo current_user_info = user_info;
             is_waiting_result = true;
             ImGui::OpenPopup("Result");
-            std::thread([&emuenv, about_me_str, current_user_info]() {
+            std::thread([&emuenv, about_me_str, current_user_info, &lang]() {
                 const auto res = v3kn::v3kn_change_about_me(current_user_info, about_me_str);
                 V3knPendingResult result;
                 result.action = V3knPendingAction::CHANGE_ABOUT_ME;
                 result.response = res;
                 if (res.body.starts_with("OK:"))
-                    result.message = "About Me changed successfully for user " + current_user_info.online_id;
+                    result.message = fmt::format(fmt::runtime(lang["about_me_success_changed"]), current_user_info.online_id);
                 else
                     result.message = v3kn::get_v3kn_error_message(emuenv, res);
                 {
@@ -873,13 +879,13 @@ void draw_v3kn_dialog(GuiState &gui, EmuEnvState &emuenv) {
         ImGui::EndPopup();
     }
 
-    // Change avatar
+    // Change Avatar
     ImGui::SetCursorPosX((WINDOW_SIZE.x / 2.f) + (20.f * SCALE.x));
-    if (ImGui::Button("Change Avatar", BUTTON_SIZE))
+    if (ImGui::Button(lang["change_avatar"].c_str(), BUTTON_SIZE))
         ImGui::OpenPopup("V3KN Change Avatar");
 
     if (ImGui::BeginPopupModal("V3KN Change Avatar", nullptr, popup_flags)) {
-        const auto title_popup = "Change V3KN Avatar";
+        const auto title_popup = lang["change_v3kn_avatar"].c_str();
         ImGui::SetCursorPosX((ImGui::GetWindowWidth() - ImGui::CalcTextSize(title_popup).x) / 2.f);
         ImGui::TextColored(GUI_COLOR_TEXT_TITLE, "%s", title_popup);
         ImGui::Separator();
@@ -904,7 +910,7 @@ void draw_v3kn_dialog(GuiState &gui, EmuEnvState &emuenv) {
             goto avatar_popup_end;
         }
 
-        if (ImGui::Button("Browse...", BUTTON_SIZE)) {
+        if (ImGui::Button(lang["browse"].c_str(), BUTTON_SIZE)) {
             fs::path avatar_path{};
             const auto result = host::dialog::filesystem::open_file(avatar_path, { { "Image file", { "bmp", "gif", "jpg", "jpeg", "png", "tif" } } });
             if (result == host::dialog::filesystem::Result::SUCCESS && fs::exists(avatar_path)) {
@@ -919,16 +925,16 @@ void draw_v3kn_dialog(GuiState &gui, EmuEnvState &emuenv) {
                     preview_h = h;
                     stbi_image_free(data);
                 } else {
-                    avatar_result_message = "Failed to load image.";
+                    avatar_result_message = lang["load_image_failed"];
                     selected_avatar_path.clear();
                 }
             } else if (result == host::dialog::filesystem::Result::ERROR) {
-                avatar_result_message = fmt::format("File dialog error: {}", host::dialog::filesystem::get_error());
+                avatar_result_message = fmt::format(fmt::runtime(lang["file_dialog_error"]), host::dialog::filesystem::get_error());
             }
         }
 
         if (!selected_avatar_path.empty()) {
-            ImGui::Text("Selected: %s", fs::path(selected_avatar_path).filename().string().c_str());
+            ImGui::Text("%s%s", lang["selected"].c_str(), fs::path(selected_avatar_path).filename().string().c_str());
             if (avatar_preview && preview_w > 0 && preview_h > 0) {
                 const float max_preview = 128.f * SCALE.x;
                 const float ratio = std::min(max_preview / static_cast<float>(preview_w), max_preview / static_cast<float>(preview_h));
@@ -947,16 +953,16 @@ void draw_v3kn_dialog(GuiState &gui, EmuEnvState &emuenv) {
 
         ImGui::BeginDisabled(selected_avatar_path.empty() || is_uploading);
         ImGui::SetCursorPosX((ImGui::GetWindowWidth() / 2.f) - SMALL_BUTTON_SIZE.x - (20.f * SCALE.x));
-        if (ImGui::Button(is_uploading ? "Uploading..." : OK_STR.c_str(), SMALL_BUTTON_SIZE)) {
+        if (ImGui::Button(is_uploading ? lang["uploading"].c_str() : OK_STR.c_str(), SMALL_BUTTON_SIZE)) {
             is_uploading = true;
             avatar_result_message.clear();
-            std::thread([&gui, &emuenv, &user_info]() {
+            std::thread([&gui, &emuenv, &user_info, &lang]() {
                 constexpr int canvas_size = 128;
 
                 int w, h;
                 stbi_uc *img = stbi_load(selected_avatar_path.c_str(), &w, &h, nullptr, STBI_rgb_alpha);
                 if (!img) {
-                    avatar_result_message = "Failed to load image for processing.";
+                    avatar_result_message = lang["processing_image_failed"];
                     is_uploading = false;
                     return;
                 }
@@ -1024,7 +1030,7 @@ avatar_popup_end:
 
     // Change Panel
     ImGui::SetCursorPosX((WINDOW_SIZE.x / 2.f) + (20.f * SCALE.x));
-    if (ImGui::Button("Change Panel", BUTTON_SIZE))
+    if (ImGui::Button(lang["change_panel"].c_str(), BUTTON_SIZE))
         ImGui::OpenPopup("V3KN Change Panel");
     ImGui::EndDisabled();
 
@@ -1043,12 +1049,12 @@ avatar_popup_end:
     static bool show_panel_crop_popup = false;
 
     if (ImGui::BeginPopupModal("V3KN Change Panel", nullptr, popup_flags)) {
-        const auto title_popup = "Change V3KN Panel";
+        const auto title_popup = lang["change_v3kn_panel"].c_str();
         ImGui::SetCursorPosX((ImGui::GetWindowWidth() - ImGui::CalcTextSize(title_popup).x) / 2.f);
         ImGui::TextColored(GUI_COLOR_TEXT_TITLE, "%s", title_popup);
         ImGui::Separator();
 
-        if (ImGui::Button("Browse...", BUTTON_SIZE)) {
+        if (ImGui::Button(lang["browse"].c_str(), BUTTON_SIZE)) {
             fs::path panel_path{};
             const auto result = host::dialog::filesystem::open_file(panel_path, { { "Image file", { "bmp", "gif", "jpg", "jpeg", "png", "tif" } } });
             if (result == host::dialog::filesystem::Result::SUCCESS && fs::exists(panel_path)) {
@@ -1070,11 +1076,11 @@ avatar_popup_end:
                     show_panel_crop_popup = true;
                     ImGui::CloseCurrentPopup();
                 } else {
-                    panel_result_message = "Failed to load image.";
+                    panel_result_message = lang["load_image_failed"];
                     selected_panel_path.clear();
                 }
             } else if (result == host::dialog::filesystem::Result::ERROR) {
-                panel_result_message = fmt::format("File dialog error: {}", host::dialog::filesystem::get_error());
+                panel_result_message = fmt::format(fmt::runtime(lang["file_dialog_error"]), host::dialog::filesystem::get_error());
             }
         }
         ImGui::SetCursorPosX((ImGui::GetWindowWidth() - SMALL_BUTTON_SIZE.x) / 2.f);
@@ -1102,7 +1108,7 @@ avatar_popup_end:
     }
 
     if (ImGui::BeginPopupModal("V3KN Panel Crop", nullptr, popup_flags)) {
-        const auto title_popup = "Crop V3KN Panel";
+        const auto title_popup = lang["crop_v3kn_panel"].c_str();
         ImGui::SetCursorPosX((ImGui::GetWindowWidth() - ImGui::CalcTextSize(title_popup).x) / 2.f);
         ImGui::TextColored(GUI_COLOR_TEXT_TITLE, "%s", title_popup);
         ImGui::Separator();
@@ -1132,7 +1138,7 @@ avatar_popup_end:
             if (panel_view_height <= 0.f)
                 panel_view_height = PANEL_SIZE.y;
 
-            ImGui::Text("Selected: %s", fs::path(selected_panel_path).filename().string().c_str());
+            ImGui::Text("%s%s", lang["selected"].c_str(), fs::path(selected_panel_path).filename().string().c_str());
             const ImVec2 zoom_button_size(40.f * SCALE.x, 40.f * SCALE.y);
             const float panel_crop_start_x = (ImGui::GetWindowWidth() - panel_crop_size.x) / 2.f;
             const float panel_crop_start_y = ImGui::GetCursorPosY();
@@ -1213,7 +1219,7 @@ avatar_popup_end:
 
             ImGui::BeginDisabled(is_panel_uploading);
             ImGui::SetCursorPosX((ImGui::GetWindowWidth() / 2.f) - SMALL_BUTTON_SIZE.x - (20.f * SCALE.x));
-            if (ImGui::Button(is_panel_uploading ? "Uploading..." : OK_STR.c_str(), SMALL_BUTTON_SIZE)) {
+            if (ImGui::Button(is_panel_uploading ? lang["uploading"].c_str() : OK_STR.c_str(), SMALL_BUTTON_SIZE)) {
                 is_panel_uploading = true;
                 panel_result_message.clear();
 
@@ -1242,20 +1248,20 @@ avatar_popup_end:
         }
     }
 
-    // Change server
+    // Change Server
     static int selected_index = static_cast<int>(account_state.selected_server_index);
     ImGui::SetCursorPosX((WINDOW_SIZE.x / 2.f) + (20.f * SCALE.x));
-    if (ImGui::Button("Change Server", BUTTON_SIZE)) {
+    if (ImGui::Button(lang["change_server"].c_str(), BUTTON_SIZE)) {
         selected_index = static_cast<int>(account_state.selected_server_index);
         ImGui::OpenPopup("V3KN Change Server");
     }
 
     if (ImGui::BeginPopupModal("V3KN Change Server", nullptr, popup_flags)) {
-        const auto title_popup = "Change V3KN Server";
+        const auto title_popup = lang["change_v3kn_server"].c_str();
         ImGui::SetCursorPosX((ImGui::GetWindowWidth() - ImGui::CalcTextSize(title_popup).x) / 2.f);
         ImGui::TextColored(GUI_COLOR_TEXT_TITLE, "%s", title_popup);
         ImGui::Separator();
-        ImGui::Combo("Server", &selected_index, V3KN_SERVER_LIST_NAME.data(), static_cast<int>(V3KN_SERVER_LIST_NAME.size()));
+        ImGui::Combo(lang["server"].c_str(), &selected_index, V3KN_SERVER_LIST_NAME.data(), static_cast<int>(V3KN_SERVER_LIST_NAME.size()));
         ImGui::SetCursorPosX((ImGui::GetWindowWidth() / 2.f) - SMALL_BUTTON_SIZE.x - (20.f * SCALE.x));
         if (ImGui::Button(OK_STR.c_str(), SMALL_BUTTON_SIZE)) {
             if (selected_index != static_cast<int>(account_state.selected_server_index)) {
@@ -1284,7 +1290,7 @@ avatar_popup_end:
 
     const float close_x_pos = (WINDOW_SIZE.x - BUTTON_SIZE.x) / 2.f;
     ImGui::SetCursorPosX(close_x_pos);
-    if (ImGui::Button("Close", BUTTON_SIZE)) {
+    if (ImGui::Button(CLOSE_STR.c_str(), BUTTON_SIZE)) {
         gui.configuration_menu.v3kn_dialog = false;
     }
 

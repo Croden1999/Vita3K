@@ -66,7 +66,6 @@
 		</path>
 		<live_area>
 			<manual>Руководство</manual>
-			<update>Обновление</update>
 		</live_area>
 		<delete>
 			<delete_app>Это приложение и все связанные с ним данные, в том числе сохраненные данные, будут удалены.</delete_app>
@@ -98,6 +97,8 @@
 		<an_error_occurred>Произошла ошибка.
 Код ошибки: {}</an_error_occurred>
 		<cancel>Отмена</cancel>
+		<connecting_please_wait>Идет соединение...
+Подождите.</connecting_please_wait>
 		<close>Закрыть</close>
 		<could_not_load>Не удалось загрузить файл.</could_not_load>
 		<could_not_save>Не удалось сохранить файл.</could_not_save>
@@ -106,12 +107,17 @@
 		<file_corrupted>Файл поврежден.</file_corrupted>
 		<microphone_disabled>Включите микрофон.</microphone_disabled>
 		<no>Нет</no>
+		<ok>OK</ok>
 		<please_wait>Подождите...</please_wait>
 		<search>Поиск</search>
 		<select_all>Выбрать все</select_all>
 		<select>Выбрать</select>
 		<submit>Подтвердить</submit>
 		<yes>Да</yes>
+		<could_not_connect_server>Не удалось подключиться к серверу.</could_not_connect_server>
+		<must_sign_in_vita3k_network>Необходимо войти в сеть Vita3K Network для использования этой функции.</must_sign_in_vita3k_network>
+		<could_not_connect_internet>Не удалось подключиться к Интернету.</could_not_connect_internet>
+		<vita3k_network_connection_lost>Соединение с Vita3K Network прервано.</vita3k_network_connection_lost>
 		<wday>
 			<day>воскресенье</day>
 			<day>понедельник</day>
@@ -502,7 +508,7 @@
 			<show_hide>Показать/скрыть Live Area при работе приложения</show_hide>
 			<show_hide_control>Нажать PS</show_hide_control>
 			<exit_livearea>Выйти из Live Area</exit_livearea>
-			<exit_livearea_control>Нажать Esc или кружок</exit_livearea_control>
+			<exit_livearea_control>Нажать X или кружок</exit_livearea_control>
 			<manual_help>Справка по мануалу</manual_help>
 			<browse_page>Просмотр
 страницы</browse_page>
@@ -511,17 +517,39 @@
 			<hide_show>Скрыть/показать кнопки</hide_show>
 			<hide_show_control>Левая кнопка мышки или нажать треугольник</hide_show_control>
 			<exit_manual>Закрыть мануал</exit_manual>
-			<exit_manual_control>Нажать на Esc или PS</exit_manual_control>
+			<exit_manual_control>Нажать на X или PS</exit_manual_control>
 		</help>
 	</live_area>
 
 	<message>
-		<load_app_failed>Не удалось загрузить "{}".
+		<load_app_failed>Не удалось загрузить {}.
 Проверьте vita3k.log, чтобы увидеть вывод консоли для получения подробной информации.
 1. Установлена ли у вас прошивка?
 2. Скопируйте собственное приложение(я)/игру(ы) и установите его на Vita 3K.
 3. Если вы хотите установить или запустить Vitamin, он не поддерживается.</load_app_failed>
 	</message>
+
+	<online_storage>
+		<save_data_auto_upload>Автозагрузка сохраненных данных</save_data_auto_upload>
+		<copying>Идет копирование...</copying>
+		<download>Загрузить</download>
+		<eligible>Допущен</eligible>
+		<ineligible>Не допущен</ineligible>
+		<location>Местоположение</location>
+		<memory_card>Карта памяти</memory_card>
+		<minutes_left>Осталось минут: {}</minutes_left>
+		<online_storage>Сетевая память</online_storage>
+		<cloud>Cloud</cloud>
+		<overwrite_saved_data>Перезаписать сохраненные данные?</overwrite_saved_data>
+		<seconds_left>Осталось секунд: {}</seconds_left>
+		<size>Размер</size>
+		<trophy_earning>Полученные призы</trophy_earning>
+		<updated>Обновлен</updated>
+		<upload>Загрузка в сеть</upload>
+		<uploaded>Загружен в сеть</uploaded>
+		<local>Local</local>
+	</online_storage>
+
 	<performance_overlay>
 		<avg>Сред</avg>
 		<min>Мин</min>
@@ -529,6 +557,9 @@
 	</performance_overlay>
 
 	<settings name="Настройки">
+		<sound_display name="Звук и изображение">
+			<system_music>Фоновая музыка системы</system_music>
+		</sound_display>
 		<theme_background name="Тема и Фон">
 			<default>По умолчанию</default>
 			<theme name="Тема">
@@ -845,9 +876,72 @@
 		<user_deleted>Пользователь удален.</user_deleted>
 		<choose_avatar>Выбрать аватар</choose_avatar>
 		<reset_avatar>Сбросить аватар</reset_avatar>
+		<user>User</user>
 		<confirm>Подтвердить</confirm>
 		<automatic_user_login>Автоматический вход в систему</automatic_user_login>
 	</user_management>
+
+	<vita3k_network name="V3KN Account Management">
+		<server_name>Server: </server_name>
+		<signed_in_id>Signed In - ID: </signed_in_id>
+		<offline_id>Offline - ID: </offline_id>
+		<not_signed_in_id>Not Signed In - ID: </not_signed_in_id>
+		<created_at>Created At: </created_at>
+		<quota_used>Quota Used: </quota_used>
+		<create_account>Create Account</create_account>
+		<create_v3kn_account>Create V3KN Account</create_v3kn_account>
+		<account_username_password>Please enter a username and password to create your V3KN account.</account_username_password>
+		<account_username>Username must start with a letter and contain 3-16 characters (letters, numbers, _ or -).</account_username>
+		<account_password>Password must be at least 8 characters long.</account_password>
+		<username>Username</username>
+		<password>Password</password>
+		<confirm_password>Confirm Password</confirm_password>
+		<password_not_match>Password and confirmation do not match.</password_not_match>
+		<account_success_created>Account created successfully for user {}.</account_success_created>
+		<unexpected_response_format>Unexpected response format from server: {}.</unexpected_response_format>
+		<login>Login</login>
+		<v3kn_login>V3KN Login</v3kn_login>
+		<account_success_login>Login on V3KN successfully for user {}.</account_success_login>
+		<testing>Testing...</testing>
+		<test_connection>Test Connection</test_connection>
+		<test_saved_credentials>Test connection to V3KN server with saved credentials.</test_saved_credentials>
+		<refresh_quota>Refresh Quota</refresh_quota>
+		<quota_refreshed>Quota refreshed: </quota_refreshed>
+		<delete_account>Delete Account</delete_account>
+		<delete_v3kn_account>Delete V3KN Account</delete_v3kn_account>
+		<account_success_deleted>Account V3KN deleted successfully for user {}.</account_success_deleted>
+		<logout>Logout</logout>
+		<v3kn_logout>Are you sure you want to logout from V3KN?</v3kn_logout>
+		<account_success_logout>Logged out successfully.</account_success_logout>
+		<change_online_id>Change Online ID</change_online_id>
+		<change_v3kn_online_id>Change V3KN Online ID</change_v3kn_online_id>
+		<new_username>New Username</new_username>
+		<online_id_success_changed>Online ID successfully changed to {}.</online_id_success_changed>
+		<change_password>Change Password</change_password>
+		<change_v3kn_password>Change V3KN Password</change_v3kn_password>
+		<current_password>Current Password</current_password>
+		<new_password>New Password</new_password>
+		<current_password_incorrect>Current password is incorrect.</current_password_incorrect>
+		<password_success_changed>Password changed successfully for user {}.</password_success_changed>
+		<change_about_me>Change About Me</change_about_me>
+		<change_v3kn_about_me>Change V3KN About Me</change_v3kn_about_me>
+		<about_me>Про меня</about_me>
+		<about_me_success_changed>About Me changed successfully for user {}.</about_me_success_changed>
+		<change_avatar>Change Avatar</change_avatar>
+		<change_v3kn_avatar>Change V3KN Avatar</change_v3kn_avatar>
+		<browse>Browse...</browse>
+		<load_image_failed>Failed to load image.</load_image_failed>
+		<file_dialog_error>File dialog error: {}.</file_dialog_error>
+		<uploading>Uploading...</uploading>
+		<processing_image_failed>Failed to load image for processing.</processing_image_failed>
+		<change_panel>Change Panel</change_panel>
+		<change_v3kn_panel>Change V3KN Panel</change_v3kn_panel>
+		<crop_v3kn_panel>Crop V3KN Panel</crop_v3kn_panel>
+		<selected>Selected: </selected>
+		<change_server>Change Server</change_server>
+		<change_v3kn_server>Change V3KN Server</change_v3kn_server>
+		<server>Server</server>
+	</vita3k_network>
 
 	<vita3k_update name="Обновление Vita3K">
  		<new_version_available>Доступна новая версия Vita3K.</new_version_available>

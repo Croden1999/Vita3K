@@ -27,7 +27,6 @@
 	<app_context>
 		<live_area>
 			<manual>Handbok</manual>
-			<update>Uppdatera</update>
 		</live_area>
 		<delete>
 			<delete_app>Den här applikationen och alla tillhörande data, inklusive sparade data, kommer att raderas.</delete_app>
@@ -51,6 +50,8 @@
 		<an_error_occurred>Ett fel har inträffat.
 Felkod: {}</an_error_occurred>
 		<cancel>Avbryt</cancel>
+		<connecting_please_wait>Ansluter...
+Vänta.</connecting_please_wait>
 		<close>Stänga</close>
 		<could_not_load>Kunde inte ladda filen.</could_not_load>
 		<could_not_save>Kunde inte spara filen.</could_not_save>
@@ -59,10 +60,15 @@ Felkod: {}</an_error_occurred>
 		<file_corrupted>Filen är skadad.</file_corrupted>
 		<microphone_disabled>Aktivera mikrofonen.</microphone_disabled>
 		<no>Nej</no>
+		<ok>OK</ok>
 		<please_wait>Vänta...</please_wait>
 		<select_all>Välj alla</select_all>
 		<select>Välj</select>
 		<yes>Ja</yes>
+		<could_not_connect_server>Kunde inte ansluta till servern.</could_not_connect_server>
+		<must_sign_in_vita3k_network>Du måste logga in på Vita3K Network för att använda den här funktionen.</must_sign_in_vita3k_network>
+		<could_not_connect_internet>Kunde inte ansluta till Internet.</could_not_connect_internet>
+		<vita3k_network_connection_lost>Anslutningen till Vita3K Network har kopplats från.</vita3k_network_connection_lost>
 		<wday>
 			<day>söndag</day>
 			<day>måndag</day>
@@ -271,8 +277,32 @@ Tryck på 'Ge Åtkomst' för att fortsätta.</storage_file_permissions>
 		<start>Starta</start>
 		<continue>Fortsätt</continue>
 	</live_area>
+
+	<online_storage>
+		<save_data_auto_upload>Automatisk överföring av sparade data</save_data_auto_upload>
+		<copying>Kopierar...</copying>
+		<download>Ladda ned</download>
+		<eligible>Möjligt</eligible>
+		<ineligible>Inte möjligt</ineligible>
+		<location>Sökväg</location>
+		<memory_card>Minneskort</memory_card>
+		<minutes_left>{} minuter kvar</minutes_left>
+		<online_storage>Onlinelagringsutrymme</online_storage>
+		<cloud>Cloud</cloud>
+		<overwrite_saved_data>Vill du skriva över sparade data?</overwrite_saved_data>
+		<seconds_left>{} sekunder kvar</seconds_left>
+		<size>Storlek</size>
+		<trophy_earning>Vinna trophy</trophy_earning>
+		<updated>Uppdaterat</updated>
+		<upload>Uppladdning</upload>
+		<uploaded>Uppladdad</uploaded>
+		<local>Local</local>
+	</online_storage>
 	
 	<settings name="Inställningar">
+		<sound_display name="Ljud och bildskärm">
+			<system_music>Systemmusik</system_music>
+		</sound_display>
 		<theme_background name="Tema och bakgrund">
 			<default>Standardinställning</default>
 			<theme name="Tema">
@@ -331,6 +361,8 @@ Tryck på 'Ge Åtkomst' för att fortsätta.</storage_file_permissions>
 	</settings>
 
 	<settings_dialog name="Inställningar">
+		<camera name="Kamera">
+		</camera>
 		<system name="System">
 		</system>
 		<network name="Nätverk">
@@ -377,8 +409,71 @@ Du kan få trophies om du använder en applikation som stöder trophy-funktionen
 Är du säker på att du vill fortsetta?</user_delete_warn>
 		<user_deleted>Användaren har tagits bort.</user_deleted>
 		<choose_avatar>Välj avatar</choose_avatar>
+		<user>User</user>
 		<confirm>Bekräfta</confirm>
 	</user_management>
+
+	<vita3k_network name="V3KN Account Management">
+		<server_name>Server: </server_name>
+		<signed_in_id>Signed In - ID: </signed_in_id>
+		<offline_id>Offline - ID: </offline_id>
+		<not_signed_in_id>Not Signed In - ID: </not_signed_in_id>
+		<created_at>Created At: </created_at>
+		<quota_used>Quota Used: </quota_used>
+		<create_account>Create Account</create_account>
+		<create_v3kn_account>Create V3KN Account</create_v3kn_account>
+		<account_username_password>Please enter a username and password to create your V3KN account.</account_username_password>
+		<account_username>Username must start with a letter and contain 3-16 characters (letters, numbers, _ or -).</account_username>
+		<account_password>Password must be at least 8 characters long.</account_password>
+		<username>Username</username>
+		<password>Password</password>
+		<confirm_password>Confirm Password</confirm_password>
+		<password_not_match>Password and confirmation do not match.</password_not_match>
+		<account_success_created>Account created successfully for user {}.</account_success_created>
+		<unexpected_response_format>Unexpected response format from server: {}.</unexpected_response_format>
+		<login>Login</login>
+		<v3kn_login>V3KN Login</v3kn_login>
+		<account_success_login>Login on V3KN successfully for user {}.</account_success_login>
+		<testing>Testing...</testing>
+		<test_connection>Test Connection</test_connection>
+		<test_saved_credentials>Test connection to V3KN server with saved credentials.</test_saved_credentials>
+		<refresh_quota>Refresh Quota</refresh_quota>
+		<quota_refreshed>Quota refreshed: </quota_refreshed>
+		<delete_account>Delete Account</delete_account>
+		<delete_v3kn_account>Delete V3KN Account</delete_v3kn_account>
+		<account_success_deleted>Account V3KN deleted successfully for user {}.</account_success_deleted>
+		<logout>Logout</logout>
+		<v3kn_logout>Are you sure you want to logout from V3KN?</v3kn_logout>
+		<account_success_logout>Logged out successfully.</account_success_logout>
+		<change_online_id>Change Online ID</change_online_id>
+		<change_v3kn_online_id>Change V3KN Online ID</change_v3kn_online_id>
+		<new_username>New Username</new_username>
+		<online_id_success_changed>Online ID successfully changed to {}.</online_id_success_changed>
+		<change_password>Change Password</change_password>
+		<change_v3kn_password>Change V3KN Password</change_v3kn_password>
+		<current_password>Current Password</current_password>
+		<new_password>New Password</new_password>
+		<current_password_incorrect>Current password is incorrect.</current_password_incorrect>
+		<password_success_changed>Password changed successfully for user {}.</password_success_changed>
+		<change_about_me>Change About Me</change_about_me>
+		<change_v3kn_about_me>Change V3KN About Me</change_v3kn_about_me>
+		<about_me>Om mig</about_me>
+		<about_me_success_changed>About Me changed successfully for user {}.</about_me_success_changed>
+		<change_avatar>Change Avatar</change_avatar>
+		<change_v3kn_avatar>Change V3KN Avatar</change_v3kn_avatar>
+		<browse>Browse...</browse>
+		<load_image_failed>Failed to load image.</load_image_failed>
+		<file_dialog_error>File dialog error: {}.</file_dialog_error>
+		<uploading>Uploading...</uploading>
+		<processing_image_failed>Failed to load image for processing.</processing_image_failed>
+		<change_panel>Change Panel</change_panel>
+		<change_v3kn_panel>Change V3KN Panel</change_v3kn_panel>
+		<crop_v3kn_panel>Crop V3KN Panel</crop_v3kn_panel>
+		<selected>Selected: </selected>
+		<change_server>Change Server</change_server>
+		<change_v3kn_server>Change V3KN Server</change_v3kn_server>
+		<server>Server</server>
+	</vita3k_network>
 
 	<vita3k_update name="Vita3K-uppdatering">
  		<new_version_available>En ny version av Vita3K är tillgänglig.</new_version_available>

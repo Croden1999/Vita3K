@@ -4,7 +4,7 @@
 	<main_menubar>
 		<file name="檔案">
 			<open_pref_path>開啟存放路徑</open_pref_path>
-			<open_patch_path>開啟補丁路徑</open_patch_path>
+			<open_patches_path>開啟補丁路徑</open_patches_path>
 			<open_textures_path>開啟紋理路徑</open_textures_path>
 			<install_firmware>安裝韌體</install_firmware>
 			<install_pkg>安裝pkg</install_pkg>
@@ -79,7 +79,6 @@
 		</path>
 		<live_area>
 			<manual>說明書</manual>
-			<update>更新</update>
 		</live_area>
 		<delete>
 			<delete_app>刪除此應用程式及所有相關資料（包括保存資料）。</delete_app>
@@ -89,7 +88,8 @@
 			<delete_addcont>確定要刪除此追加內容嗎？</delete_addcont>
 			<delete_license>確定要刪除此授權嗎？</delete_license>
 		</delete>
-		<other name="其他">
+		<other name="其它">
+			<decrypt_all_self>解密全部SELF</decrypt_all_self>
 			<reset_last_time_played>重設上次遊玩時間</reset_last_time_played>
 		</other>
 		<update_history>更新履歷</update_history>
@@ -125,6 +125,8 @@
 		<an_error_occurred>發生錯誤。
 錯誤編號：{}</an_error_occurred>
 		<cancel>取消</cancel>
+		<connecting_please_wait>連線中……
+請稍候。</connecting_please_wait>
 		<close>關閉</close>
 		<could_not_load>無法載入。</could_not_load>
 		<could_not_save>無法保存。</could_not_save>
@@ -133,12 +135,17 @@
 		<file_corrupted>檔案已毀損。</file_corrupted>
 		<microphone_disabled>請啟用麥克風。</microphone_disabled>
 		<no>否</no>
+		<ok>OK</ok>
 		<please_wait>請稍候……</please_wait>
 		<search>搜尋</search>
 		<select_all>全選</select_all>
 		<select>選擇</select>
 		<submit>提交</submit>
 		<yes>是</yes>
+		<could_not_connect_server>無法與伺服器連線。</could_not_connect_server>
+		<must_sign_in_vita3k_network>若要使用此機能，需先登入Vita3K Network。</must_sign_in_vita3k_network>
+		<could_not_connect_internet>無法與網際網路連線。</could_not_connect_internet>
+		<vita3k_network_connection_lost>與Vita3K Network的連線已被切斷。</vita3k_network_connection_lost>
 		<wday>
 			<day>星期日</day>
 			<day>星期一</day>
@@ -324,6 +331,7 @@
 	<controls>
 		<button>按鈕</button>
 		<mapped_button>按鍵對應</mapped_button>
+		<mapped_button_alt>備用按鍵對應</mapped_button_alt>
 		<left_stick_up>左操作桿上</left_stick_up>
 		<left_stick_down>左操作桿下</left_stick_down>
 		<left_stick_right>左操作桿右</left_stick_right>
@@ -472,6 +480,7 @@
 		<apps_list_grid_description>勾選此項將應用程式列表設定為像PS Vita一樣的網格模式。</apps_list_grid_description>
 		<icon_size>應用程式圖標大小</icon_size>
 		<select_icon_size>選擇您喜歡的圖標大小。</select_icon_size>
+		<system_music_description>此項可以稍後在系統設定应用程式中變更。</system_music_description>
 		<completed>已完成。</completed>
 		<next>繼續</next>
 	</initial_setup>
@@ -492,6 +501,8 @@
 			<enter_zrif>輸入zRIF</enter_zrif>
 			<enter_zrif_key>輸入zRIF金鑰</enter_zrif_key>
 			<input_zrif>請在此處輸入您的zRIF</input_zrif>
+			<inputmethod_paste_zrif>使用輸入法剪貼板複製貼上。
+鍵盤：Ctrl+C複製，Ctrl+V貼上。</inputmethod_paste_zrif>
 			<copy_paste_zrif>Ctrl+C複製，Ctrl+V貼上。</copy_paste_zrif>
 			<delete_pkg>刪除pkg檔案？</delete_pkg>
 			<delete_bin_rif>刪除work.bin/rif檔案？</delete_bin_rif>
@@ -536,24 +547,45 @@
 			<show_hide>應用程式執行時顯示/隱藏Live Area</show_hide>
 			<show_hide_control>按PS按鈕</show_hide_control>
 			<exit_livearea>解除Live Area</exit_livearea>
-			<exit_livearea_control>按下Esc或按圓形按鈕</exit_livearea_control>
+			<exit_livearea_control>按下X或按圓形按鈕</exit_livearea_control>
 			<manual_help>說明書</manual_help>
 			<browse_page>瀏覽頁面</browse_page>
 			<browse_page_control>方向鍵、左操作桿、滾輪上/下或使用滾動條、按下&lt;/&gt;</browse_page_control>
 			<hide_show>隱藏/顯示按鈕</hide_show>
 			<hide_show_control>按下左鍵或按三角按鈕</hide_show_control>
 			<exit_manual>解除說明書</exit_manual>
-			<exit_manual_control>按下Esc或按PS按鈕</exit_manual_control>
+			<exit_manual_control>按下X或按PS按鈕</exit_manual_control>
 		</help>
 	</live_area>
 
 	<message>
-		<load_app_failed>無法讀取“{}”，
+		<load_app_failed>無法讀取 {} ，
 請檢查vita3k.log查閲控制臺輸出的詳細資訊。
 1、您是否安裝了韌體？
 2、重新傾印您已擁有的PS Vita應用程式/遊戲，並在Vita3K中安裝。
 3、如果您想要安裝/執行Vitamin是不支援的。</load_app_failed>
 	</message>
+
+	<online_storage>
+		<save_data_auto_upload>自動上傳保存資料</save_data_auto_upload>
+		<copying>複製中……</copying>
+		<download>下載</download>
+		<eligible>有權</eligible>
+		<ineligible>無權</ineligible>
+		<location>位置</location>
+		<memory_card>記憶卡</memory_card>
+		<minutes_left>剩下 {}分鐘</minutes_left>
+		<online_storage>線上儲存空間</online_storage>
+		<cloud>雲端</cloud>
+		<overwrite_saved_data>確定要覆寫保存資料嗎？</overwrite_saved_data>
+		<seconds_left>剩下 {}秒</seconds_left>
+		<size>檔案大小</size>
+		<trophy_earning>獲得獎盃</trophy_earning>
+		<updated>更新日</updated>
+		<upload>上傳</upload>
+		<uploaded>上傳日</uploaded>
+		<local>本地</local>
+	</online_storage>
 
 	<overlay name="虛擬按鈕">
 		<gamepad_overlay>手把虛擬按鈕</gamepad_overlay>
@@ -574,6 +606,9 @@
 	</performance_overlay>
 
 	<settings name="設定">
+		<sound_display name="聲音&顯示器">
+			<system_music>系統音樂</system_music>
+		</sound_display>
 		<theme_background name="主題&背景">
 			<default>原音</default>
 			<theme name="主題">
@@ -651,6 +686,10 @@
 			<no_modules>沒有模組存在。
 請下載並安裝最新的PS Vita韌體。</no_modules>
 			<refresh_list>更新列表</refresh_list>
+			<rename_libpaf>重命名libpaf</rename_libpaf>
+			<libpaf_rename>重命名libpaf模組可以啟動VitaShell以及其它自製程式。</libpaf_rename>
+			<restore_libpaf>恢復libpaf</restore_libpaf>
+			<libpaf_restore>恢復libpaf模組可以啟動PSVita OS。</libpaf_restore>
 		</core>
 		<cpu>
 			<cpu_opt>啟用最佳化</cpu_opt>
@@ -703,8 +742,8 @@
 			<external_host>外部主機</external_host>
 			<page_table>頁表</page_table>
 			<native_buffer>原生緩衝</native_buffer>
-			<mapping_method>內存映射方式</mapping_method>
-			<mapping_method_description>內存映射提高了性能，減少內存使用量，並修復了許多圖形問題。
+			<mapping_method>記憶體對映方式</mapping_method>
+			<mapping_method_description>記憶體對映提高了性能，減少記憶體使用量，並修復了許多圖形問題。
 但是它在某些GPU上可能不穩定。</mapping_method_description>
 			<turbo_mode>啟用睿頻模式</turbo_mode>
 			<turbo_mode_description>提供了一種方法提來强制GPU以允許的最高時鐘頻率運行（溫控仍然適用）。</turbo_mode_description>
@@ -728,6 +767,14 @@
 			<bgm_volume>背景音樂音量</bgm_volume>
 			<bgm_volume_description>調整主題背景音樂的音量百分比。</bgm_volume_description>
 		</audio>
+		<camera name="相機">
+			<front_camera>前置攝像頭</front_camera>
+			<back_camera>後置攝像頭</back_camera>
+			<image_not_set>圖像未設定</image_not_set>
+			<set_image>設定圖像</set_image>
+			<solid_color>純色</solid_color>
+			<static_image>靜態圖像</static_image>
+		</camera>
 		<system name="系統">
 			<select_enter_button>確認按鈕分配
 請選擇您的“確認”按鈕。</select_enter_button>
@@ -943,9 +990,72 @@
 		<user_deleted>已刪除使用者。</user_deleted>
 		<choose_avatar>選擇個人造型</choose_avatar>
 		<reset_avatar>重置個人造型</reset_avatar>
+		<user>User</user>
 		<confirm>確定</confirm>
 		<automatic_user_login>自動登入使用者</automatic_user_login>
 	</user_management>
+
+	<vita3k_network name="V3KN賬號管理">
+		<server_name>伺服器：</server_name>
+		<signed_in_id>已登入 - ID：</signed_in_id>
+		<offline_id>離線 - ID：</offline_id>
+		<not_signed_in_id>未登入 - ID：</not_signed_in_id>
+		<created_at>創建於：</created_at>
+		<quota_used>已使用配額：</quota_used>
+		<create_account>建立賬號</create_account>
+		<create_v3kn_account>建立V3KN賬號</create_v3kn_account>
+		<account_username_password>請輸入使用者名稱和密碼以建立您的V3KN賬號。</account_username_password>
+		<account_username>使用者名稱必須以字母開頭，並且包含3到16位字元（字母、數字、_或-）。</account_username>
+		<account_password>密碼長度必須至少為8位字元。</account_password>
+		<username>使用者名稱</username>
+		<password>密碼</password>
+		<confirm_password>確認密碼</confirm_password>
+		<password_not_match>密碼和確認密碼不匹配。</password_not_match>
+		<account_success_created>使用者{}的賬號已成功建立。</account_success_created>
+		<unexpected_response_format>來自伺服器的意外響應格式：{}。</unexpected_response_format>
+		<login>登入</login>
+		<v3kn_login>登入V3KN</v3kn_login>
+		<account_success_login>使用者{}成功登入V3KN。</account_success_login>
+		<testing>測試中……</testing>
+		<test_connection>測試連接</test_connection>
+		<test_saved_credentials>使用已儲存的憑據測試與V3KN伺服器的連線。</test_saved_credentials>
+		<refresh_quota>更新配額</refresh_quota>
+		<quota_refreshed>配额已更新：</quota_refreshed>
+		<delete_account>刪除賬號</delete_account>
+		<delete_v3kn_account>刪除V3KN賬號</delete_v3kn_account>
+		<account_success_deleted>已成功為使用者{}刪除V3KN賬號。</account_success_deleted>
+		<logout>登出</logout>
+		<v3kn_logout>您確定要從V3KN登出嗎？</v3kn_logout>
+		<account_success_logout>已成功登出。</account_success_logout>
+		<change_online_id>更改線上ID</change_online_id>
+		<change_v3kn_online_id>更改V3KN線上ID</change_v3kn_online_id>
+		<new_username>新使用者名稱</new_username>
+		<online_id_success_changed>線上ID已成功更改為{}。</online_id_success_changed>
+		<change_password>更改密碼</change_password>
+		<change_v3kn_password>更改V3KN密碼</change_v3kn_password>
+		<current_password>當前密碼</current_password>
+		<new_password>新密碼</new_password>
+		<current_password_incorrect>當前密碼不正確。</current_password_incorrect>
+		<password_success_changed>使用者{}的密碼已成功更改。</password_success_changed>
+		<change_about_me>更改自我介紹</change_about_me>
+		<change_v3kn_about_me>更改V3KN自我介紹</change_v3kn_about_me>
+		<about_me>自我介紹</about_me>
+		<about_me_success_changed>使用者{}的自我介紹已成功更改。</about_me_success_changed>
+		<change_avatar>更改虛擬形象</change_avatar>
+		<change_v3kn_avatar>更改V3KN虛擬形象</change_v3kn_avatar>
+		<browse>瀏覽……</browse>
+		<load_image_failed>無法載入圖像。</load_image_failed>
+		<file_dialog_error>檔案對話方塊錯誤：{}。</file_dialog_error>
+		<uploading>上傳中……</uploading>
+		<processing_image_failed>無法載入圖像進行處理。</processing_image_failed>
+		<change_panel>更改面板</change_panel>
+		<change_v3kn_panel>更改V3KN面板</change_v3kn_panel>
+		<crop_v3kn_panel>裁剪V3KN面板</crop_v3kn_panel>
+		<selected>已選擇：</selected>
+		<change_server>更改伺服器</change_server>
+		<change_v3kn_server>更改V3KN伺服器</change_v3kn_server>
+		<server>伺服器</server>
+	</vita3k_network>
 
 	<vita3k_update name="Vita3K更新">
  		<new_version_available>發現新版的Vita3K。</new_version_available>

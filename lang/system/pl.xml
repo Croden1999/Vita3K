@@ -76,7 +76,6 @@
 		</path>
 		<live_area>
 			<manual>Instrukcja obsługi</manual>
-			<update>Aktualizuj</update>
 		</live_area>
 		<delete>
 			<delete_app>Aplikacja i wszystkie powiązane dane, w tym zapisane dane, zostaną usunięte.</delete_app>
@@ -116,6 +115,8 @@ jest to zależne od jej rozmiaru i twojego sprzętu.</delete_app_description>
 		<an_error_occurred>Wystąpił błąd.
 Kod błędu: {}</an_error_occurred>
 		<cancel>Anuluj</cancel>
+		<connecting_please_wait>Łączenie...
+Czekaj.</connecting_please_wait>
 		<close>Zamknij</close>
 		<could_not_load>Nie można załadować pliku.</could_not_load>
 		<could_not_save>Nie można zapisać pliku.</could_not_save>
@@ -131,6 +132,10 @@ Kod błędu: {}</an_error_occurred>
 		<select>Zaznacz</select>
 		<submit>Zatwierdź</submit>
 		<yes>Tak</yes>
+		<could_not_connect_server>Nie można nawiązać połączenia z serwerem.</could_not_connect_server>
+		<must_sign_in_vita3k_network>Aby korzystać z tej funkcji, należy wpisać się do sieci Vita3K Network.</must_sign_in_vita3k_network>
+		<could_not_connect_internet>Nie można nawiązać połączenia z Internetem.</could_not_connect_internet>
+		<vita3k_network_connection_lost>Połączenie z siecią Vita3K Network zostało przerwane.</vita3k_network_connection_lost>
 		<wday>
 			<day>niedziela</day>
 			<day>poniedziałek</day>
@@ -524,24 +529,45 @@ Upewnij się, że pliki work.bin/rif lub klucz zRIF.</failed_install_license>
 			<show_hide>Pokazuj/Ukrywaj 'Live Area' podczas uruchamiania aplikacji</show_hide>
 			<show_hide_control>Naciśnij przycisk PS</show_hide_control>
 			<exit_livearea>Wyjdź z 'Live Area'</exit_livearea>
-			<exit_livearea_control>Naciśnij 'Esc' lub kółko</exit_livearea_control>
+			<exit_livearea_control>Naciśnij 'X' lub kółko</exit_livearea_control>
 			<manual_help>Pomoc instrukcji użytkownika</manual_help>
 			<browse_page>Przeszukaj strone</browse_page>
 			<browse_page_control>Krzyżak (D-pad), Lewy drążek, kołko myszy w górę/dół lub za pomocą suwaka, Naciśnij na &lt;/&gt;</browse_page_control>
 			<hide_show>Ukryj/pokaż przycisk</hide_show>
 			<hide_show_control>Lewy przycisk myszy lub wciśnij Trójkąt</hide_show_control>
 			<exit_manual>Wyjdź z instrukcji</exit_manual>
-			<exit_manual_control>Naciśnij Esc lub wciśnij PS na kontrolerze</exit_manual_control>
+			<exit_manual_control>Naciśnij X lub wciśnij PS na kontrolerze</exit_manual_control>
 		</help>
 	</live_area>
 	
 	<message>
-		<load_app_failed>Nie udało się wczytać "{}".
+		<load_app_failed>Nie udało się wczytać {}.
 Sprawdź plik vita3k.log, aby zobaczyć szczegóły na konsoli.
 1. Czy zainstalowałeś oprogramowanie (firmware)?
 2. Zrób ponowny zrzut swojej aplikacji/gry PS Vita i zainstaluj ją na Vita3K.
 3. Instalacja lub uruchamianie Vitamin nie jest wspierane.</load_app_failed>
 	</message>
+
+	<online_storage>
+		<save_data_auto_upload>Automatyczne przesyłanie zapisanych danych</save_data_auto_upload>
+		<copying>Kopiowanie...</copying>
+		<download>Pobierz</download>
+		<eligible>Spełnia warunki</eligible>
+		<ineligible>Nie spełnia warunków</ineligible>
+		<location>Lokalizacja</location>
+		<memory_card>Karta pamięci</memory_card>
+		<minutes_left>Pozostało {} min</minutes_left>
+		<online_storage>Dysk internetowy</online_storage>
+		<cloud>Cloud</cloud>
+		<overwrite_saved_data>Czy chcesz nadpisać zapisane dane?</overwrite_saved_data>
+		<seconds_left>Pozostało {} s</seconds_left>
+		<size>Rozmiar</size>
+		<trophy_earning>Zdobywanie trofeów</trophy_earning>
+		<updated>Zaktualizowano</updated>
+		<upload>Przesyłanie</upload>
+		<uploaded>Przesłane</uploaded>
+		<local>Local</local>
+	</online_storage>
 
 	<performance_overlay>
 		<avg>Śred</avg>
@@ -550,6 +576,9 @@ Sprawdź plik vita3k.log, aby zobaczyć szczegóły na konsoli.
 	</performance_overlay>
 	
 	<settings name="Ustawienia">
+		<sound_display name="Dźwięk i ekran">
+			<system_music>Muzyka w systemie</system_music>
+		</sound_display>
 		<theme_background name="Motyw i tło">
 			<default>Domyślnie</default>
 			<theme name="Motyw">
@@ -690,6 +719,8 @@ W innych grach może to nie mieć żadnego efektu lub spowodować, że będą dz
 			<enable_ngs_support>Włącz wsparcie dla NGS</enable_ngs_support>
 			<ngs_description>Odznacz, aby wyłączyć wsparcie dla zaawansowanej biblioteki dzwięków NGS.</ngs_description>
 		</audio>
+		<camera name="Kamera">
+		</camera>
 		<system name="System">
 			<select_enter_button>Przypisanie przycisku potwierdzenia
 Wybierz swój przycisk potwierdzenia.</select_enter_button>
@@ -904,6 +935,68 @@ Czy na pewno chcesz kontynuować?</user_delete_warn>
 		<confirm>Potwierdź</confirm>
 		<automatic_user_login>Automatyczne logowanie</automatic_user_login>
 	</user_management>
+
+	<vita3k_network name="V3KN Account Management">
+		<server_name>Server: </server_name>
+		<signed_in_id>Signed In - ID: </signed_in_id>
+		<offline_id>Offline - ID: </offline_id>
+		<not_signed_in_id>Not Signed In - ID: </not_signed_in_id>
+		<created_at>Created At: </created_at>
+		<quota_used>Quota Used: </quota_used>
+		<create_account>Create Account</create_account>
+		<create_v3kn_account>Create V3KN Account</create_v3kn_account>
+		<account_username_password>Please enter a username and password to create your V3KN account.</account_username_password>
+		<account_username>Username must start with a letter and contain 3-16 characters (letters, numbers, _ or -).</account_username>
+		<account_password>Password must be at least 8 characters long.</account_password>
+		<username>Username</username>
+		<password>Password</password>
+		<confirm_password>Confirm Password</confirm_password>
+		<password_not_match>Password and confirmation do not match.</password_not_match>
+		<account_success_created>Account created successfully for user {}.</account_success_created>
+		<unexpected_response_format>Unexpected response format from server: {}.</unexpected_response_format>
+		<login>Login</login>
+		<v3kn_login>V3KN Login</v3kn_login>
+		<account_success_login>Login on V3KN successfully for user {}.</account_success_login>
+		<testing>Testing...</testing>
+		<test_connection>Test Connection</test_connection>
+		<test_saved_credentials>Test connection to V3KN server with saved credentials.</test_saved_credentials>
+		<refresh_quota>Refresh Quota</refresh_quota>
+		<quota_refreshed>Quota refreshed: </quota_refreshed>
+		<delete_account>Delete Account</delete_account>
+		<delete_v3kn_account>Delete V3KN Account</delete_v3kn_account>
+		<account_success_deleted>Account V3KN deleted successfully for user {}.</account_success_deleted>
+		<logout>Logout</logout>
+		<v3kn_logout>Are you sure you want to logout from V3KN?</v3kn_logout>
+		<account_success_logout>Logged out successfully.</account_success_logout>
+		<change_online_id>Change Online ID</change_online_id>
+		<change_v3kn_online_id>Change V3KN Online ID</change_v3kn_online_id>
+		<new_username>New Username</new_username>
+		<online_id_success_changed>Online ID successfully changed to {}.</online_id_success_changed>
+		<change_password>Change Password</change_password>
+		<change_v3kn_password>Change V3KN Password</change_v3kn_password>
+		<current_password>Current Password</current_password>
+		<new_password>New Password</new_password>
+		<current_password_incorrect>Current password is incorrect.</current_password_incorrect>
+		<password_success_changed>Password changed successfully for user {}.</password_success_changed>
+		<change_about_me>Change About Me</change_about_me>
+		<change_v3kn_about_me>Change V3KN About Me</change_v3kn_about_me>
+		<about_me>O sobie</about_me>
+		<about_me_success_changed>About Me changed successfully for user {}.</about_me_success_changed>
+		<change_avatar>Change Avatar</change_avatar>
+		<change_v3kn_avatar>Change V3KN Avatar</change_v3kn_avatar>
+		<browse>Browse...</browse>
+		<load_image_failed>Failed to load image.</load_image_failed>
+		<file_dialog_error>File dialog error: {}.</file_dialog_error>
+		<uploading>Uploading...</uploading>
+		<processing_image_failed>Failed to load image for processing.</processing_image_failed>
+		<change_panel>Change Panel</change_panel>
+		<change_v3kn_panel>Change V3KN Panel</change_v3kn_panel>
+		<crop_v3kn_panel>Crop V3KN Panel</crop_v3kn_panel>
+		<selected>Selected: </selected>
+		<change_server>Change Server</change_server>
+		<change_v3kn_server>Change V3KN Server</change_v3kn_server>
+		<server>Server</server>
+	</vita3k_network>
 
 	<vita3k_update name="Aktualizacja Vita3K">
  		<new_version_available>Dostępna jest nowa wersja Vita3K.</new_version_available>

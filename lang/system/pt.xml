@@ -27,7 +27,6 @@
 	<app_context>
 		<live_area>
 			<manual>Manual</manual>
-			<update>Atualização</update>
 		</live_area>
 		<delete>
 			<delete_app>Esta aplicação e todos os dados relacionados, incluindo dados guardados, serão elminados.</delete_app>
@@ -54,6 +53,8 @@
 		<an_error_occurred>Ocorreu um erro.
 Código de erro: {}</an_error_occurred>
 		<cancel>Cancelar</cancel>
+		<connecting_please_wait>A ligar...
+Por favor, aguarde.</connecting_please_wait>
 		<close>Fechar</close>
 		<could_not_load>Não foi possível carregar o ficheiro.</could_not_load>
 		<could_not_save>Não foi possível guardar o ficheiro.</could_not_save>
@@ -62,10 +63,15 @@ Código de erro: {}</an_error_occurred>
 		<file_corrupted>O ficheiro está corrompido.</file_corrupted>
 		<microphone_disabled>Ative o microfone.</microphone_disabled>
 		<no>Não</no>
+		<ok>OK</ok>
 		<please_wait>Por favor aguarde...</please_wait>
 		<select_all>Selecionar Todos</select_all>
 		<select>Selecionar</select>
 		<yes>Sim</yes>
+		<could_not_connect_server>Não foi possível ligar ao servidor.</could_not_connect_server>
+		<must_sign_in_vita3k_network>Deverá iniciar a sessão na Vita3K Network para utilizar esta funcionalidade.</must_sign_in_vita3k_network>
+		<could_not_connect_internet>Não foi possível ligar à Internet.</could_not_connect_internet>
+		<vita3k_network_connection_lost>A ligação à Vita3K Network foi perdida.</vita3k_network_connection_lost>
 		<wday>
 			<day>domingo</day>
 			<day>segunda-feira</day>
@@ -271,7 +277,31 @@ O seu sistema Vita3K está pronto!</completed_setup>
 		<continue>Continuar</continue>
 	</live_area>
 
+	<online_storage>
+		<save_data_auto_upload>Carregamento automático dos dados guardados</save_data_auto_upload>
+		<copying>A copiar...</copying>
+		<download>Transferir</download>
+		<eligible>Elegível</eligible>
+		<ineligible>Inelegível</ineligible>
+		<location>Local</location>
+		<memory_card>Cartão de memória</memory_card>
+		<minutes_left>Restam {} minutos</minutes_left>
+		<online_storage>Armazenamento online</online_storage>
+		<cloud>Cloud</cloud>
+		<overwrite_saved_data>Pretende gravar por cima dos dados guardados?</overwrite_saved_data>
+		<seconds_left>Restam {} segundos</seconds_left>
+		<size>Tamanho</size>
+		<trophy_earning>Ganho de troféus</trophy_earning>
+		<updated>Atualizado</updated>
+		<upload>Envio</upload>
+		<uploaded>Carregado</uploaded>
+		<local>Local</local>
+	</online_storage>
+
 	<settings name="Definições">
+		<sound_display name="Som e apresentação">
+			<system_music>Música do sistema</system_music>
+		</sound_display>
 		<theme_background name="Tema e fundo">
 			<default>Predefinição</default>
 			<theme name="Tema">
@@ -329,6 +359,8 @@ O seu sistema Vita3K está pronto!</completed_setup>
 	</settings>
 
 	<settings_dialog name="Definições">
+		<camera name="Câmara">
+		</camera>
 		<system name="Sistema">
 		</system>
 		<network name="Rede">
@@ -379,6 +411,68 @@ Tem a certeza de que pretende continuar?</user_delete_warn>
 		<user>Utilizador</user>
 		<confirm>Confirmar</confirm>
 	</user_management>
+
+	<vita3k_network name="V3KN Account Management">
+		<server_name>Server: </server_name>
+		<signed_in_id>Signed In - ID: </signed_in_id>
+		<offline_id>Offline - ID: </offline_id>
+		<not_signed_in_id>Not Signed In - ID: </not_signed_in_id>
+		<created_at>Created At: </created_at>
+		<quota_used>Quota Used: </quota_used>
+		<create_account>Create Account</create_account>
+		<create_v3kn_account>Create V3KN Account</create_v3kn_account>
+		<account_username_password>Please enter a username and password to create your V3KN account.</account_username_password>
+		<account_username>Username must start with a letter and contain 3-16 characters (letters, numbers, _ or -).</account_username>
+		<account_password>Password must be at least 8 characters long.</account_password>
+		<username>Username</username>
+		<password>Password</password>
+		<confirm_password>Confirm Password</confirm_password>
+		<password_not_match>Password and confirmation do not match.</password_not_match>
+		<account_success_created>Account created successfully for user {}.</account_success_created>
+		<unexpected_response_format>Unexpected response format from server: {}.</unexpected_response_format>
+		<login>Login</login>
+		<v3kn_login>V3KN Login</v3kn_login>
+		<account_success_login>Login on V3KN successfully for user {}.</account_success_login>
+		<testing>Testing...</testing>
+		<test_connection>Test Connection</test_connection>
+		<test_saved_credentials>Test connection to V3KN server with saved credentials.</test_saved_credentials>
+		<refresh_quota>Refresh Quota</refresh_quota>
+		<quota_refreshed>Quota refreshed: </quota_refreshed>
+		<delete_account>Delete Account</delete_account>
+		<delete_v3kn_account>Delete V3KN Account</delete_v3kn_account>
+		<account_success_deleted>Account V3KN deleted successfully for user {}.</account_success_deleted>
+		<logout>Logout</logout>
+		<v3kn_logout>Are you sure you want to logout from V3KN?</v3kn_logout>
+		<account_success_logout>Logged out successfully.</account_success_logout>
+		<change_online_id>Change Online ID</change_online_id>
+		<change_v3kn_online_id>Change V3KN Online ID</change_v3kn_online_id>
+		<new_username>New Username</new_username>
+		<online_id_success_changed>Online ID successfully changed to {}.</online_id_success_changed>
+		<change_password>Change Password</change_password>
+		<change_v3kn_password>Change V3KN Password</change_v3kn_password>
+		<current_password>Current Password</current_password>
+		<new_password>New Password</new_password>
+		<current_password_incorrect>Current password is incorrect.</current_password_incorrect>
+		<password_success_changed>Password changed successfully for user {}.</password_success_changed>
+		<change_about_me>Change About Me</change_about_me>
+		<change_v3kn_about_me>Change V3KN About Me</change_v3kn_about_me>
+		<about_me>Sobre mim</about_me>
+		<about_me_success_changed>About Me changed successfully for user {}.</about_me_success_changed>
+		<change_avatar>Change Avatar</change_avatar>
+		<change_v3kn_avatar>Change V3KN Avatar</change_v3kn_avatar>
+		<browse>Browse...</browse>
+		<load_image_failed>Failed to load image.</load_image_failed>
+		<file_dialog_error>File dialog error: {}.</file_dialog_error>
+		<uploading>Uploading...</uploading>
+		<processing_image_failed>Failed to load image for processing.</processing_image_failed>
+		<change_panel>Change Panel</change_panel>
+		<change_v3kn_panel>Change V3KN Panel</change_v3kn_panel>
+		<crop_v3kn_panel>Crop V3KN Panel</crop_v3kn_panel>
+		<selected>Selected: </selected>
+		<change_server>Change Server</change_server>
+		<change_v3kn_server>Change V3KN Server</change_v3kn_server>
+		<server>Server</server>
+	</vita3k_network>
 
 	<vita3k_update name="Atualização Vita3K">
  		<new_version_available>Está disponível uma nova versão da Vita3K.</new_version_available>

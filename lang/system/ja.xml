@@ -63,7 +63,6 @@
 		</path>
 		<live_area>
 			<manual>マニュアル</manual>
-			<update>アップデート</update>
 		</live_area>
 		<delete>
 			<delete_app>このアプリケーションと、関連するすべてのデータ(セーブデータを含む)を削除します。</delete_app>
@@ -103,6 +102,8 @@
 		<an_error_occurred>エラーが起きました。
 エラーコード：{}</an_error_occurred>
 		<cancel>キャンセル</cancel>
+		<connecting_please_wait>接続中です...
+しばらくお待ちくださ。</connecting_please_wait>
 		<close>閉じる</close>
 		<could_not_load>ロードできませんでした。</could_not_load>
 		<could_not_save>セーブできませんでした。</could_not_save>
@@ -111,12 +112,17 @@
 		<file_corrupted>ファイルが壊れています。</file_corrupted>
 		<microphone_disabled>マイクを有効にしてください。</microphone_disabled>
 		<no>いいえ</no>
+		<ok>OK</ok>
 		<please_wait>しばらくお待ちください...</please_wait>
 		<search>検索</search>
 		<select_all>すべて選択</select_all>
 		<select>選択</select>
 		<submit>確認</submit>
 		<yes>はい</yes>
+		<could_not_connect_server>サーバーと接続できませんでした。</could_not_connect_server>
+		<must_sign_in_vita3k_network>この機能をご利用になるには、Vita3K Networkにサインインする必要があります。</must_sign_in_vita3k_network>
+		<could_not_connect_internet>インターネットに接続できませんでした。</could_not_connect_internet>
+		<vita3k_network_connection_lost>Vita3K Networkへの接続が切断されました。</vita3k_network_connection_lost>
 		<wday>
 			<day>日曜日</day>
 			<day>月曜日</day>
@@ -477,17 +483,41 @@ GUIでのアジア地域のフォントサポートに必須です。
 			<show_hide>アプリの起動中にLiveareaの表示/非表示を切り替える</show_hide>
 			<show_hide_control>PSボタンを押す</show_hide_control>
 			<exit_livearea>Liveareaを閉じる</exit_livearea>
-			<exit_livearea_control>Escを押すか丸ボタンを押す</exit_livearea_control>
+			<exit_livearea_control>Xを押すか丸ボタンを押す</exit_livearea_control>
 			<browse_page>ページの閲覧</browse_page>
 			<browse_page_control>方向キー、左ステック、ホイールの上下またはスライダーまたは&lt;/&gt;</browse_page_control>
 			<hide_show>ボタンの表示/非表示</hide_show>
 			<hide_show_control>左クリックまたは三角ボタンを押す</hide_show_control>
 			<exit_manual>マニュアルを閉じる</exit_manual>
-			<exit_manual_control>Escを押すかPSボタンを押す</exit_manual_control>
+			<exit_manual_control>Xを押すかPSボタンを押す</exit_manual_control>
 		</help>
 	</live_area>
 
+	<online_storage>
+		<save_data_auto_upload>セーブデータ自動アップロード</save_data_auto_upload>
+		<copying>コピー中です...</copying>
+		<download>ダウンロード</download>
+		<eligible>権利あり</eligible>
+		<ineligible>権利なし</ineligible>
+		<location>場所</location>
+		<memory_card>メモリーカード</memory_card>
+		<minutes_left>残り {}分</minutes_left>
+		<online_storage>オンラインストレージ</online_storage>
+		<cloud>Cloud</cloud>
+		<overwrite_saved_data>セーブデータを上書きしますか？</overwrite_saved_data>
+		<seconds_left>残り {}秒</seconds_left>
+		<size>サイズ</size>
+		<trophy_earning>トロフィー獲得</trophy_earning>
+		<updated>更新日</updated>
+		<upload>アップロード</upload>
+		<uploaded>アップロードした日</uploaded>
+		<local>Local</local>
+	</online_storage>
+
 	<settings name="設定">
+		<sound_display name="サウンド&ディスプレイ">
+			<system_music>システムのミュージック</system_music>
+		</sound_display>
 		<theme_background name="テーマ&背景">
 			<default>デフォルト</default>
 			<theme name="テーマ">
@@ -606,6 +636,8 @@ GUIでのアジア地域のフォントサポートに必須です。
 			<enable_ngs_support>NGSサポートを有効にする</enable_ngs_support>
 			<ngs_description>NGSオーディオライブラリのサポートを無効にするには、チェックボックスを外します。</ngs_description>
 		</audio>
+		<camera name="カメラ">
+		</camera>
 		<system name="システム">
 			<select_enter_button>決定ボタンの割り当て
 「決定」ボタンを選択してください。</select_enter_button>
@@ -768,6 +800,68 @@ GUIでのアジア地域のフォントサポートに必須です。
 		<confirm>確定</confirm>
 		<automatic_user_login>ユーザー自動ログインをする</automatic_user_login>
 	</user_management>
+
+	<vita3k_network name="V3KN Account Management">
+		<server_name>Server: </server_name>
+		<signed_in_id>Signed In - ID: </signed_in_id>
+		<offline_id>Offline - ID: </offline_id>
+		<not_signed_in_id>Not Signed In - ID: </not_signed_in_id>
+		<created_at>Created At: </created_at>
+		<quota_used>Quota Used: </quota_used>
+		<create_account>Create Account</create_account>
+		<create_v3kn_account>Create V3KN Account</create_v3kn_account>
+		<account_username_password>Please enter a username and password to create your V3KN account.</account_username_password>
+		<account_username>Username must start with a letter and contain 3-16 characters (letters, numbers, _ or -).</account_username>
+		<account_password>Password must be at least 8 characters long.</account_password>
+		<username>Username</username>
+		<password>Password</password>
+		<confirm_password>Confirm Password</confirm_password>
+		<password_not_match>Password and confirmation do not match.</password_not_match>
+		<account_success_created>Account created successfully for user {}.</account_success_created>
+		<unexpected_response_format>Unexpected response format from server: {}.</unexpected_response_format>
+		<login>Login</login>
+		<v3kn_login>V3KN Login</v3kn_login>
+		<account_success_login>Login on V3KN successfully for user {}.</account_success_login>
+		<testing>Testing...</testing>
+		<test_connection>Test Connection</test_connection>
+		<test_saved_credentials>Test connection to V3KN server with saved credentials.</test_saved_credentials>
+		<refresh_quota>Refresh Quota</refresh_quota>
+		<quota_refreshed>Quota refreshed: </quota_refreshed>
+		<delete_account>Delete Account</delete_account>
+		<delete_v3kn_account>Delete V3KN Account</delete_v3kn_account>
+		<account_success_deleted>Account V3KN deleted successfully for user {}.</account_success_deleted>
+		<logout>Logout</logout>
+		<v3kn_logout>Are you sure you want to logout from V3KN?</v3kn_logout>
+		<account_success_logout>Logged out successfully.</account_success_logout>
+		<change_online_id>Change Online ID</change_online_id>
+		<change_v3kn_online_id>Change V3KN Online ID</change_v3kn_online_id>
+		<new_username>New Username</new_username>
+		<online_id_success_changed>Online ID successfully changed to {}.</online_id_success_changed>
+		<change_password>Change Password</change_password>
+		<change_v3kn_password>Change V3KN Password</change_v3kn_password>
+		<current_password>Current Password</current_password>
+		<new_password>New Password</new_password>
+		<current_password_incorrect>Current password is incorrect.</current_password_incorrect>
+		<password_success_changed>Password changed successfully for user {}.</password_success_changed>
+		<change_about_me>Change About Me</change_about_me>
+		<change_v3kn_about_me>Change V3KN About Me</change_v3kn_about_me>
+		<about_me>自己紹介</about_me>
+		<about_me_success_changed>About Me changed successfully for user {}.</about_me_success_changed>
+		<change_avatar>Change Avatar</change_avatar>
+		<change_v3kn_avatar>Change V3KN Avatar</change_v3kn_avatar>
+		<browse>Browse...</browse>
+		<load_image_failed>Failed to load image.</load_image_failed>
+		<file_dialog_error>File dialog error: {}.</file_dialog_error>
+		<uploading>Uploading...</uploading>
+		<processing_image_failed>Failed to load image for processing.</processing_image_failed>
+		<change_panel>Change Panel</change_panel>
+		<change_v3kn_panel>Change V3KN Panel</change_v3kn_panel>
+		<crop_v3kn_panel>Crop V3KN Panel</crop_v3kn_panel>
+		<selected>Selected: </selected>
+		<change_server>Change Server</change_server>
+		<change_v3kn_server>Change V3KN Server</change_v3kn_server>
+		<server>Server</server>
+	</vita3k_network>
 	
 	<vita3k_update name="Vita3Kのアップデート">
  		<new_version_available>新しいバージョンのVita3Kがあります。</new_version_available>

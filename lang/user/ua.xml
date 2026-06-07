@@ -75,7 +75,6 @@
 		</path>
 		<live_area>
 			<manual>Довідка</manual>
-			<update>Оновити</update>
 		</live_area>
 		<delete>
 			<delete_app>Ця програма та всі пов'язані дані, враховуючи збережені дані, будуть видалені.</delete_app>

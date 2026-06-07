@@ -64,7 +64,6 @@
 		</path>
 		<live_area>
 			<manual>Manuel</manual>
-			<update>Mise à jour</update>
 		</live_area>
 		<delete>
 			<delete_app>Cette application et toutes les données associées, y compris les données sauvegardées, vont être supprimées.</delete_app>
@@ -103,6 +102,7 @@ Merci de patienter.</connecting_please_wait>
 		<file_corrupted>Le fichier est corrompu.</file_corrupted>
 		<microphone_disabled>Activez le microphone.</microphone_disabled>
 		<no>Non</no>
+		<ok>OK</ok>
 		<please_wait>Merci de patienter...</please_wait>
 		<search>Recherche</search>
 		<select_all>Sélectionner tout</select_all>
@@ -367,14 +367,14 @@ Appuyez sur 'Autoriser l'accès' pour continuer.</storage_file_permissions>
 			<show_hide>Show/Hide Live Area during app run</show_hide>
 			<show_hide_control>Appuyer sur PS</show_hide_control>
 			<exit_livearea>Exit Live Area</exit_livearea>
-			<exit_livearea_control>Click on Esc or Press on Circle</exit_livearea_control>
+			<exit_livearea_control>Click on X or Press on Circle</exit_livearea_control>
 			<manual_help>Manual Help</manual_help>
 			<browse_page>Browse page</browse_page>
 			<browse_page_control>D-pad, Left Stick, Wheel in Up/Down or using Slider, Click on &lt;/&gt;</browse_page_control>
 			<hide_show>Hide/Show button</hide_show>
 			<hide_show_control>Left Click or Press on Triangle</hide_show_control>
 			<exit_manual>Exit Manual</exit_manual>
-			<exit_manual_control>Click on Esc or Press on PS</exit_manual_control>
+			<exit_manual_control>Click on X or Press on PS</exit_manual_control>
 		</help>
 	</live_area>
 
@@ -388,15 +388,15 @@ Appuyez sur 'Autoriser l'accès' pour continuer.</storage_file_permissions>
 		<memory_card>Carte mémoire</memory_card>
 		<minutes_left>{} minutes restantes</minutes_left>
 		<online_storage>Stockage en ligne</online_storage>
+		<cloud>Cloud</cloud>
 		<overwrite_saved_data>Écraser les données sauvegardées ?</overwrite_saved_data>
-		<ps_vita_system>Système PS Vita</ps_vita_system>
-		<ps_tv_system>Système PS TV</ps_tv_system>
 		<seconds_left>{} secondes restantes</seconds_left>
 		<size>Taille</size>
 		<trophy_earning>Obtention de trophées</trophy_earning>
 		<updated>Mis à jour</updated>
 		<upload>Téléchargement en amont</upload>
 		<uploaded>Téléchargée en amont</uploaded>
+		<local>Local</local>
 	</online_storage>
 
 	<settings name="Paramètres">
@@ -465,6 +465,8 @@ Appuyez sur 'Autoriser l'accès' pour continuer.</storage_file_permissions>
 	</settings>
 
 	<settings_dialog name="Paramètres">
+		<camera name="Appareil photo">
+		</camera>
 		<system name="Système">
 		</system>
 		<network name="Réseau">
@@ -520,6 +522,68 @@ Voulez-vous vraiment continuer?</user_delete_warn>
 		<confirm>Confirmer</confirm>
 		<automatic_user_login>Connexion automatique de l'utilisateur</automatic_user_login>
 	</user_management>
+
+	<vita3k_network name="V3KN Account Management">
+		<server_name>Server: </server_name>
+		<signed_in_id>Signed In - ID: </signed_in_id>
+		<offline_id>Offline - ID: </offline_id>
+		<not_signed_in_id>Not Signed In - ID: </not_signed_in_id>
+		<created_at>Created At: </created_at>
+		<quota_used>Quota Used: </quota_used>
+		<create_account>Create Account</create_account>
+		<create_v3kn_account>Create V3KN Account</create_v3kn_account>
+		<account_username_password>Please enter a username and password to create your V3KN account.</account_username_password>
+		<account_username>Username must start with a letter and contain 3-16 characters (letters, numbers, _ or -).</account_username>
+		<account_password>Password must be at least 8 characters long.</account_password>
+		<username>Username</username>
+		<password>Password</password>
+		<confirm_password>Confirm Password</confirm_password>
+		<password_not_match>Password and confirmation do not match.</password_not_match>
+		<account_success_created>Account created successfully for user {}.</account_success_created>
+		<unexpected_response_format>Unexpected response format from server: {}.</unexpected_response_format>
+		<login>Login</login>
+		<v3kn_login>V3KN Login</v3kn_login>
+		<account_success_login>Login on V3KN successfully for user {}.</account_success_login>
+		<testing>Testing...</testing>
+		<test_connection>Test Connection</test_connection>
+		<test_saved_credentials>Test connection to V3KN server with saved credentials.</test_saved_credentials>
+		<refresh_quota>Refresh Quota</refresh_quota>
+		<quota_refreshed>Quota refreshed: </quota_refreshed>
+		<delete_account>Delete Account</delete_account>
+		<delete_v3kn_account>Delete V3KN Account</delete_v3kn_account>
+		<account_success_deleted>Account V3KN deleted successfully for user {}.</account_success_deleted>
+		<logout>Logout</logout>
+		<v3kn_logout>Are you sure you want to logout from V3KN?</v3kn_logout>
+		<account_success_logout>Logged out successfully.</account_success_logout>
+		<change_online_id>Change Online ID</change_online_id>
+		<change_v3kn_online_id>Change V3KN Online ID</change_v3kn_online_id>
+		<new_username>New Username</new_username>
+		<online_id_success_changed>Online ID successfully changed to {}.</online_id_success_changed>
+		<change_password>Change Password</change_password>
+		<change_v3kn_password>Change V3KN Password</change_v3kn_password>
+		<current_password>Current Password</current_password>
+		<new_password>New Password</new_password>
+		<current_password_incorrect>Current password is incorrect.</current_password_incorrect>
+		<password_success_changed>Password changed successfully for user {}.</password_success_changed>
+		<change_about_me>Change About Me</change_about_me>
+		<change_v3kn_about_me>Change V3KN About Me</change_v3kn_about_me>
+		<about_me>Mon profil</about_me>
+		<about_me_success_changed>About Me changed successfully for user {}.</about_me_success_changed>
+		<change_avatar>Change Avatar</change_avatar>
+		<change_v3kn_avatar>Change V3KN Avatar</change_v3kn_avatar>
+		<browse>Browse...</browse>
+		<load_image_failed>Failed to load image.</load_image_failed>
+		<file_dialog_error>File dialog error: {}.</file_dialog_error>
+		<uploading>Uploading...</uploading>
+		<processing_image_failed>Failed to load image for processing.</processing_image_failed>
+		<change_panel>Change Panel</change_panel>
+		<change_v3kn_panel>Change V3KN Panel</change_v3kn_panel>
+		<crop_v3kn_panel>Crop V3KN Panel</crop_v3kn_panel>
+		<selected>Selected: </selected>
+		<change_server>Change Server</change_server>
+		<change_v3kn_server>Change V3KN Server</change_v3kn_server>
+		<server>Server</server>
+	</vita3k_network>
 
 	<vita3k_update name="Mise à jour Vita3K">
  		<new_version_available>Une nouvelle version de Vita3K est disponible.</new_version_available>
